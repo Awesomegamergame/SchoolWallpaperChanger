@@ -5,11 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolWallpaperChanger"
         mc:Ignorable="d"
-        ResizeMode="CanMinimize"
-        Title="MainWindow" Height="510" Width="874">
+        ResizeMode="CanResize"
+        Title="SchoolWallpaperChanger" Height="510" Width="874"
+        MinHeight="510" MinWidth="874">
     <Grid>
-        <Button Content="Select" HorizontalAlignment="Left" Margin="96,327,0,0" Click="Button_Click" VerticalAlignment="Top" Width="177" Height="60"/>
-        <Button x:Name="Change" Content="Change" HorizontalAlignment="Left" Margin="612,329,0,0" IsEnabled="False" Click="Button_Click_1" VerticalAlignment="Top" Width="181" Height="56"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="73*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="Select" Content="Select" HorizontalAlignment="Left" Visibility="Visible" Margin="89,0,0,69" Click="Select_Click" Width="177" Grid.Row="1" Height="60" VerticalAlignment="Bottom"/>
+        <Button x:Name="Change" Content="Change" Visibility="Visible" Margin="0,0,73,69" IsEnabled="False" Click="Change_Click" Grid.Row="1" HorizontalAlignment="Right" Width="181" Height="56" VerticalAlignment="Bottom"/>
+        
+        
+        <Image x:Name="UpdateScreen" Source="Images/Background.jpg" Visibility="Collapsed" Margin="0,0,0.333,-13.333" Initialized="UpdateScreen_Initialized" Grid.RowSpan="2" Stretch="Fill"/>
+        <Label x:Name="UpdateText1" Visibility="Collapsed" Content="Launcher Update Available" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="280,25,253,0" FontSize="25" Initialized="UpdateText1_Initialized" Height="44" Width="313" Grid.Row="1"/>
+        <Label x:Name="UpdateText2" Visibility="Collapsed" Content="Do You Want To Update" HorizontalAlignment="Center" FontSize="15" Initialized="UpdateText2_Initialized" Margin="347,90,330,240" Grid.Row="1" Width="169"/>
+        <Button x:Name="Yes" Content="Yes" Visibility="Collapsed" Click="Yes_Click" HorizontalAlignment="Center" Width="85" Background="#99249C1E" Margin="323,178,438,0" Initialized="Yes_Initialized" Grid.Row="1" Height="40" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="UpdateProgress" Visibility="Collapsed" HorizontalAlignment="Center" Width="256" Margin="300,185,290,0" Initialized="UpdateBar_Initialized" Grid.Row="1" Height="28" VerticalAlignment="Top"/>
+        <Button x:Name="No" Content="No" Visibility="Collapsed" Click="No_Click" Background="#99B53B20" Margin="448,178,313,0" Initialized="No_Initialized" Grid.Row="1" HorizontalAlignment="Center" Width="85" Height="40" VerticalAlignment="Top"/>
+        <Label x:Name="LocalVersionNumber" Visibility="Collapsed" Content="" HorizontalAlignment="Center" FontSize="15" Initialized="LocalVersionNumber_Initialized" Margin="230,260,537,0" RenderTransformOrigin="0.443,1.844" Width="79" Grid.Row="1" Height="35" VerticalAlignment="Top"/>
+        <Label x:Name="LocalVersion" Visibility="Collapsed" Content="Current:" HorizontalAlignment="Center" FontSize="15" Initialized="LocalVersion_Initialized" Margin="167,260,616,0" RenderTransformOrigin="0.443,1.844" Width="63" Grid.Row="1" Height="35" VerticalAlignment="Top"/>
+        <Label x:Name="OnlineVersionNumber" Visibility="Collapsed" Content="" HorizontalAlignment="Center" FontSize="15" Initialized="OnlineVersionNumber_Initialized" Margin="624,260,152,0" RenderTransformOrigin="0.443,1.844" Width="70" Grid.Row="1" Height="35" VerticalAlignment="Top"/>
+        <Label x:Name="OnlineVersion" Visibility="Collapsed" Content="New:" HorizontalAlignment="Center" FontSize="15" Initialized="OnlineVersion_Initialized" Margin="585,260,198,0" RenderTransformOrigin="0.443,1.844" Width="63" Grid.Row="1" Height="35" VerticalAlignment="Top"/>
     </Grid>
 </Window>
