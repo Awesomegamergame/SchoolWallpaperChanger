@@ -12,8 +12,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.0.2
-    - name: Install Dependencies
-      run: msbuild -t:restore
     - name: Build Project
       run: msbuild SchoolWallpaperChanger.csproj /t:Build /p:Configuration=Debug
     - name: Resolve Short Commit Hash
