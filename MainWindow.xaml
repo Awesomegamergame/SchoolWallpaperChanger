@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolWallpaperChanger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        ResizeMode="CanMinimize"
+        Title="MainWindow" Height="510" Width="874">
     <Grid>
-        
+        <Button Content="Select" HorizontalAlignment="Left" Margin="96,327,0,0" Click="Button_Click" VerticalAlignment="Top" Width="177" Height="60"/>
+        <Button x:Name="Change" Content="Change" HorizontalAlignment="Left" Margin="612,329,0,0" IsEnabled="False" Click="Button_Click_1" VerticalAlignment="Top" Width="181" Height="56"/>
+
     </Grid>
 </Window>
