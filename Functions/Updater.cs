@@ -12,7 +12,7 @@ namespace SchoolWallpaperChanger.Functions
     class Updater
     {
         public static string rootPath = Directory.GetCurrentDirectory();
-        public static string LauncherLink = "https://www.dropbox.com/s/27bwz9ct96qltlx/AGG%20Productions%20Temp.zip?dl=1";
+        public static string LauncherLink = "https://raw.githubusercontent.com/awesomegamergame/SchoolWallpaperChanger/master/Webdata/SchoolWallpaperChanger%20Temp.zip";
         public static string LauncherVerLink = "https://raw.githubusercontent.com/awesomegamergame/SchoolWallpaperChanger/master/Webdata/SchoolWallpaperChangerVersion.txt";
         public static string startPath = @".\SchoolWallpaperChanger Temp";
         public static string launcherZip = Path.Combine(rootPath, "SchoolWallpaperChanger Temp.zip");
