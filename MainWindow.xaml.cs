@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using Microsoft.Win32;
 using System.Diagnostics;
 using SchoolWallpaperChanger.Functions;
+using System.Runtime.InteropServices;
 
 namespace SchoolWallpaperChanger
 {
@@ -26,32 +27,39 @@ namespace SchoolWallpaperChanger
         {
             CheckInternet.CheckInternetState();
             InitializeComponent();
-            if (CheckInternet.IsOnline)
-                Updater.Update();
+            if (CheckInternet.IsOnline) { Updater.Update(); }
         }
 
         private void Select_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog();
-            dialog.Title = "Choose Image";
-            dialog.Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff" + "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|";
-
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Choose Image",
+                Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff" + "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
+            };
+            var dialog = openFileDialog;
             bool? result = dialog.ShowDialog();
-
             if (result == true)
             {
-                MessageBox.Show($"File Choosen {dialog.FileName}");
+                MessageBox.Show($"Image Selected: {dialog.FileName}");
                 FileLocation = dialog.FileName;
                 Change.IsEnabled = true;
             }
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+        public void SetWallpaper(string thePath)
+        {
+            SystemParametersInfo(20, 0, thePath, 4);
         }
 
         private void Change_Click(object sender, RoutedEventArgs e)
         {
             Change.IsEnabled = false;
             File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            MessageBox.Show("This Program will now log you out to apply the wallpaper now. PLEASE SAVE YOUR WORK BEFORE HITING OK");
-            Process.Start("shutdown", "-l");
+            SetWallpaper(FileLocation);
+            MessageBox.Show("Wallpaper Changed");
         }
         #region Updates
         private void No_Click(object sender, RoutedEventArgs e)
