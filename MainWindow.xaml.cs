@@ -5,6 +5,8 @@ using System.Windows.Controls;
 using Microsoft.Win32;
 using SchoolWallpaperChanger.Functions;
 using System.Runtime.InteropServices;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace SchoolWallpaperChanger
 {
@@ -40,9 +42,12 @@ namespace SchoolWallpaperChanger
             bool? result = dialog.ShowDialog();
             if (result == true)
             {
-                MessageBox.Show($"Image Selected: {dialog.FileName}");
                 FileLocation = dialog.FileName;
                 Change.IsEnabled = true;
+                BitmapImage btm = new BitmapImage(new Uri(dialog.FileName));
+                Window2.Source = btm;
+                Window2.Stretch = Stretch.Fill;
+                NoWallpaper.Visibility = Visibility.Collapsed;
             }
         }
 
