@@ -3,7 +3,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
-using System.Diagnostics;
 using SchoolWallpaperChanger.Functions;
 using System.Runtime.InteropServices;
 
