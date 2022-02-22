@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SchoolWallpaperChanger"
         mc:Ignorable="d"
         ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
         Title="SchoolWallpaperChanger" Height="510" Width="874"
         MinHeight="510" MinWidth="874">
     <Grid Background="#FF7F7F7F">
@@ -15,8 +16,9 @@
         </Grid.RowDefinitions>
         <Button x:Name="Select" Content="Select" HorizontalAlignment="Left" Visibility="Visible" FontSize=" 16" Margin="73,0,0,69" Click="Select_Click" Width="177" Grid.Row="1" Height="60" VerticalAlignment="Bottom"/>
         <Button x:Name="Change" Content="Change" Visibility="Visible" FontSize="16" Margin="0,0,73,69" IsEnabled="False" Click="Change_Click" Grid.Row="1" HorizontalAlignment="Right" Width="177" Height="60" VerticalAlignment="Bottom"/>
-        <Image x:Name="Window2" Source="Images/Background2.jpg" HorizontalAlignment="Center" Height="300" VerticalAlignment="Top" Width="450" Grid.RowSpan="2" Stretch="UniformToFill" Margin="0,34,0,0"/>
-        <Label x:Name="NoWallpaper" Content="No Wallpaper Selected" HorizontalAlignment="Center" Margin="0,37,0,0" HorizontalContentAlignment="Center"  FontSize="30" Grid.Row="1" VerticalAlignment="Top" Height="57" Width="326"/>
+        <Image x:Name="Window2" Source="Images/background2.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="74,50,74,160" Grid.RowSpan="2"/>
+        <Label x:Name="NoWallpaper" Content="No Wallpaper Selected" Margin="270,22,270,170" HorizontalContentAlignment="Center" Height="60" FontSize="30" Grid.RowSpan="2"/>
+        <Label x:Name="Warning" HorizontalAlignment="Center" Margin="0,0,0,135" Grid.Row="1" VerticalAlignment="Bottom"/>
 
         <Image x:Name="UpdateScreen" Source="Images/Background.jpg" Visibility="Collapsed" Margin="0,0,0.333,-13.333" Initialized="UpdateScreen_Initialized" Grid.RowSpan="2" Stretch="Fill"/>
         <Label x:Name="UpdateText1" Visibility="Collapsed" Content="Launcher Update Available" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="280,25,253,0" FontSize="25" Initialized="UpdateText1_Initialized" Height="44" Width="313" Grid.Row="1"/>

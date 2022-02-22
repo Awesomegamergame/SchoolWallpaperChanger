@@ -46,10 +46,18 @@ namespace SchoolWallpaperChanger
                 Change.IsEnabled = true;
                 BitmapImage btm = new BitmapImage(new Uri(dialog.FileName));
                 Window2.Source = btm;
-                Window2.Stretch = Stretch.Fill;
+                Window2.Stretch = Stretch.Uniform;
                 NoWallpaper.Visibility = Visibility.Collapsed;
-                var size = GetResolution.GetDisplayResolution();
-                MessageBox.Show("Display Resoluton: " + size.Width + "x" + size.Height);
+                var img = System.Drawing.Image.FromFile(dialog.FileName);
+                int screenWidth = (int)SystemParameters.PrimaryScreenWidth;
+                int screenHeight = (int)SystemParameters.PrimaryScreenHeight;
+                if (img.Width != screenWidth || img.Height != screenHeight)
+                {
+                    Warning.Content = $"Warning Picture Should Be {screenWidth}x{screenHeight}";
+                    Warning.Visibility = Visibility.Visible;
+                }
+                else
+                    Warning.Visibility = Visibility.Collapsed;
             }
         }
 
