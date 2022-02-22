@@ -48,12 +48,19 @@ namespace SchoolWallpaperChanger
                 Window2.Source = btm;
                 Window2.Stretch = Stretch.Uniform;
                 NoWallpaper.Visibility = Visibility.Collapsed;
+
+                //Resolution Stuff
+                GetAspect.Ratio();
                 var img = System.Drawing.Image.FromFile(dialog.FileName);
                 var size = GetResolution.GetDisplayResolution();
                 if (img.Width != size.Width || img.Height != size.Height)
                 {
                     Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
                     Warning.Visibility = Visibility.Visible;
+                }
+                else if(img.Width != GetAspect.ratio1 || img.Height != GetAspect.ratio2)
+                {
+                    MessageBox.Show($"Picture Should Be {img.Width}x{img.Height} or {GetAspect.ratio1}:{GetAspect.ratio2} Ratio");
                 }
                 else
                     Warning.Visibility = Visibility.Collapsed;
