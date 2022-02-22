@@ -59,19 +59,11 @@ namespace SchoolWallpaperChanger
                     Warning.Visibility = Visibility.Collapsed;
             }
         }
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
-        public void SetWallpaper(string thePath)
-        {
-            SystemParametersInfo(20, 0, thePath, 4);
-        }
-
         private void Change_Click(object sender, RoutedEventArgs e)
         {
             Change.IsEnabled = false;
             File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            SetWallpaper(FileLocation);
+            RefreshUI.SetWallpaper(FileLocation);
             MessageBox.Show("Wallpaper Changed");
         }
         #region Updates
