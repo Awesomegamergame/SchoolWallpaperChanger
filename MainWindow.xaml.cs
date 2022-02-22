@@ -49,11 +49,10 @@ namespace SchoolWallpaperChanger
                 Window2.Stretch = Stretch.Uniform;
                 NoWallpaper.Visibility = Visibility.Collapsed;
                 var img = System.Drawing.Image.FromFile(dialog.FileName);
-                int screenWidth = (int)SystemParameters.PrimaryScreenWidth;
-                int screenHeight = (int)SystemParameters.PrimaryScreenHeight;
-                if (img.Width != screenWidth || img.Height != screenHeight)
+                var size = GetResolution.GetDisplayResolution();
+                if (img.Width != size.Width || img.Height != size.Height)
                 {
-                    Warning.Content = $"Warning Picture Should Be {screenWidth}x{screenHeight}";
+                    Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
                     Warning.Visibility = Visibility.Visible;
                 }
                 else
