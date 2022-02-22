@@ -48,6 +48,8 @@ namespace SchoolWallpaperChanger
                 Window2.Source = btm;
                 Window2.Stretch = Stretch.Fill;
                 NoWallpaper.Visibility = Visibility.Collapsed;
+                var size = GetResolution.GetDisplayResolution();
+                MessageBox.Show("Display Resoluton: " + size.Width + "x" + size.Height);
             }
         }
 
