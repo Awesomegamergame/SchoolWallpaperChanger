@@ -71,7 +71,6 @@
     </Compile>
     <Compile Include="Functions\CheckInternet.cs" />
     <Compile Include="Functions\FileDownloader.cs" />
-    <Compile Include="Functions\GetAspect.cs" />
     <Compile Include="Functions\GetResolution.cs" />
     <Compile Include="Functions\RefreshUI.cs" />
     <Compile Include="Functions\Updater.cs" />
