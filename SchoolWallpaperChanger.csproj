@@ -72,6 +72,7 @@
     <Compile Include="Functions\CheckInternet.cs" />
     <Compile Include="Functions\FileDownloader.cs" />
     <Compile Include="Functions\GetResolution.cs" />
+    <Compile Include="Functions\RefreshUI.cs" />
     <Compile Include="Functions\Updater.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
