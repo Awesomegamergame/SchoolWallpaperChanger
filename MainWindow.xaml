@@ -21,7 +21,7 @@
         <Label x:Name="Warning" HorizontalAlignment="Center" Margin="0,0,0,135" Grid.Row="1" VerticalAlignment="Bottom"/>
 
         <Image x:Name="UpdateScreen" Source="Images/Background.jpg" Visibility="Collapsed" Margin="0,0,0.333,-13.333" Initialized="UpdateScreen_Initialized" Grid.RowSpan="2" Stretch="Fill"/>
-        <Label x:Name="UpdateText1" Visibility="Collapsed" Content="Launcher Update Available" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="280,25,253,0" FontSize="25" Initialized="UpdateText1_Initialized" Height="44" Width="313" Grid.Row="1"/>
+        <Label x:Name="UpdateText1" Visibility="Collapsed" Content="App Update Available" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="280,25,253,0" FontSize="25" Initialized="UpdateText1_Initialized" Height="44" Width="313" Grid.Row="1"/>
         <Label x:Name="UpdateText2" Visibility="Collapsed" Content="Do You Want To Update" HorizontalAlignment="Center" FontSize="15" Initialized="UpdateText2_Initialized" Margin="347,90,330,240" Grid.Row="1" Width="169"/>
         <Button x:Name="Yes" Content="Yes" Visibility="Collapsed" Click="Yes_Click" HorizontalAlignment="Center" Width="85" Background="#99249C1E" Margin="323,178,438,0" Initialized="Yes_Initialized" Grid.Row="1" Height="40" VerticalAlignment="Top"/>
         <ProgressBar x:Name="UpdateProgress" Visibility="Collapsed" HorizontalAlignment="Center" Width="256" Margin="300,185,290,0" Initialized="UpdateBar_Initialized" Grid.Row="1" Height="28" VerticalAlignment="Top"/>
