@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using Microsoft.Win32;
 using SchoolWallpaperChanger.Functions;
 using System.Windows.Media.Imaging;
@@ -12,10 +11,12 @@ namespace SchoolWallpaperChanger
     public partial class MainWindow : Window
     {
         public string FileLocation;
+        public static MainWindow window;
 
         public MainWindow()
         {
             CheckInternet.CheckInternetState();
+            window = this;
             InitializeComponent();
             if (CheckInternet.IsOnline) { Updater.Update(); }
         }
@@ -60,22 +61,22 @@ namespace SchoolWallpaperChanger
         #region Updates
         private void No_Click(object sender, RoutedEventArgs e)
         {
-            UpdateScreen_Image.Visibility = Visibility.Collapsed;
-            Yes_Button.Visibility = Visibility.Collapsed;
-            No_Button.Visibility = Visibility.Collapsed;
-            UpdateText1_Label.Visibility = Visibility.Collapsed;
-            UpdateText2_Label.Visibility = Visibility.Collapsed;
-            LocalVersionObject.Visibility = Visibility.Collapsed;
-            LocalVersionNumberObject.Visibility = Visibility.Collapsed;
-            OnlineVersionNumberObject.Visibility = Visibility.Collapsed;
-            OnlineVersionObject.Visibility = Visibility.Collapsed;
+            UpdateScreen.Visibility = Visibility.Collapsed;
+            Yes.Visibility = Visibility.Collapsed;
+            No.Visibility = Visibility.Collapsed;
+            UpdateText1.Visibility = Visibility.Collapsed;
+            UpdateText2.Visibility = Visibility.Collapsed;
+            LocalVersion.Visibility = Visibility.Collapsed;
+            LocalVersionNumber.Visibility = Visibility.Collapsed;
+            OnlineVersionNumber.Visibility = Visibility.Collapsed;
+            OnlineVersion.Visibility = Visibility.Collapsed;
         }
 
         private void Yes_Click(object sender, RoutedEventArgs e)
         {
-            Yes_Button.Visibility = Visibility.Collapsed;
-            No_Button.Visibility = Visibility.Collapsed;
-            UpdateDownloadBar.Visibility = Visibility.Visible;
+            Yes.Visibility = Visibility.Collapsed;
+            No.Visibility = Visibility.Collapsed;
+            UpdateProgress.Visibility = Visibility.Visible;
             if (Updater.VersionDetector == 1)
             {
                 Updater.UpdaterVersion();
