@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using SchoolWallpaperChanger.Functions;
-using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 
@@ -13,16 +12,6 @@ namespace SchoolWallpaperChanger
     public partial class MainWindow : Window
     {
         public string FileLocation;
-
-        public static Button Yes_Button;
-        public static Button No_Button;
-        public static Image UpdateScreen_Image;
-        public static Label UpdateText1_Label;
-        public static Label UpdateText2_Label;
-        public static ProgressBar GameDownloadBar;
-        public static ProgressBar UpdateDownloadBar;
-        public static Label LocalVersionObject, LocalVersionNumberObject;
-        public static Label OnlineVersionObject, OnlineVersionNumberObject;
 
         public MainWindow()
         {
@@ -36,7 +25,7 @@ namespace SchoolWallpaperChanger
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Title = "Choose Image",
-                Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff" + "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
+                Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.gif;*.apng"
             };
             var dialog = openFileDialog;
             bool? result = dialog.ShowDialog();
@@ -97,51 +86,6 @@ namespace SchoolWallpaperChanger
                 Updater.UpdaterVersion();
                 Updater.VersionDetector = 0;
             }
-        }
-        private void Yes_Initialized(object sender, EventArgs e)
-        {
-            Yes_Button = (Button)sender;
-        }
-        private void No_Initialized(object sender, EventArgs e)
-        {
-            No_Button = (Button)sender;
-        }
-        private void UpdateText1_Initialized(object sender, EventArgs e)
-        {
-            UpdateText1_Label = (Label)sender;
-        }
-        private void UpdateText2_Initialized(object sender, EventArgs e)
-        {
-            UpdateText2_Label = (Label)sender;
-        }
-        private void UpdateScreen_Initialized(object sender, EventArgs e)
-        {
-            UpdateScreen_Image = (Image)sender;
-        }
-        private void ProgressBar_Initialized(object sender, EventArgs e)
-        {
-            GameDownloadBar = (ProgressBar)sender;
-        }
-        private void UpdateBar_Initialized(object sender, EventArgs e)
-        {
-            UpdateDownloadBar = (ProgressBar)sender;
-        }
-        private void LocalVersionNumber_Initialized(object sender, EventArgs e)
-        {
-            LocalVersionNumberObject = (Label)sender;
-        }
-        private void LocalVersion_Initialized(object sender, EventArgs e)
-        {
-            LocalVersionObject = (Label)sender;
-        }
-        private void OnlineVersionNumber_Initialized(object sender, EventArgs e)
-        {
-            OnlineVersionNumberObject = (Label)sender;
-        }
-
-        private void OnlineVersion_Initialized(object sender, EventArgs e)
-        {
-            OnlineVersionObject = (Label)sender;
         }
         #endregion
     }
