@@ -12,6 +12,7 @@ namespace SchoolWallpaperChanger
     {
         public string FileLocation;
         public static MainWindow window;
+        public int Selected = 0;
 
         public MainWindow()
         {
@@ -23,33 +24,43 @@ namespace SchoolWallpaperChanger
 
         private void Select_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            switch (Selected)
             {
-                Title = "Choose Image",
-                Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.gif;*.apng"
-            };
-            var dialog = openFileDialog;
-            bool? result = dialog.ShowDialog();
-            if (result == true)
-            {
-                FileLocation = dialog.FileName;
-                Change.IsEnabled = true;
-                BitmapImage btm = new BitmapImage(new Uri(dialog.FileName));
-                Window2.Source = btm;
-                Window2.Stretch = Stretch.Uniform;
-                NoWallpaper.Visibility = Visibility.Collapsed;
+                case 0:
+                    OpenFileDialog openFileDialog = new OpenFileDialog
+                    {
+                        Title = "Choose Image",
+                        Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.gif;*.apng"
+                    };
+                    var dialog = openFileDialog;
+                    bool? result = dialog.ShowDialog();
+                    if (result == true)
+                    {
+                        FileLocation = dialog.FileName;
+                        Change.IsEnabled = true;
+                        BitmapImage btm = new BitmapImage(new Uri(dialog.FileName));
+                        Window2.Source = btm;
+                        Window2.Stretch = Stretch.Uniform;
+                        NoWallpaper.Visibility = Visibility.Collapsed;
 
-                //Resolution Stuff
-                var img = System.Drawing.Image.FromFile(dialog.FileName);
-                var size = GetResolution.GetDisplayResolution();
-                if (img.Width != size.Width || img.Height != size.Height)
-                {
-                    Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
-                    Warning.Visibility = Visibility.Visible;
-                }
-                else
-                    Warning.Visibility = Visibility.Collapsed;
+                        //Resolution Stuff
+                        var img = System.Drawing.Image.FromFile(dialog.FileName);
+                        var size = GetResolution.GetDisplayResolution();
+                        if (img.Width != size.Width || img.Height != size.Height)
+                        {
+                            Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
+                            Warning.Visibility = Visibility.Visible;
+                        }
+                        else
+                            Warning.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 1:
+                    MessageBox.Show("SlideShow");
+                    break;
             }
+            
+            
         }
         private void Change_Click(object sender, RoutedEventArgs e)
         {
@@ -89,5 +100,14 @@ namespace SchoolWallpaperChanger
             }
         }
         #endregion
+        private void SlideShow_Click(object sender, RoutedEventArgs e)
+        {
+            Selected = 1;
+        }
+
+        private void Picture_Click(object sender, RoutedEventArgs e)
+        {
+            Selected = 0;
+        }
     }
 }

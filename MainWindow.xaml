@@ -19,7 +19,9 @@
         <Image x:Name="Window2" Source="Images/background2.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="74,50,74,160" Grid.RowSpan="2"/>
         <Label x:Name="NoWallpaper" Content="No Wallpaper Selected" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="270,37,270,279" HorizontalContentAlignment="Center" Height="60" FontSize="30" Grid.Row="1"/>
         <Label x:Name="Warning" HorizontalAlignment="Center" Margin="0,0,0,135" Grid.Row="1" VerticalAlignment="Bottom"/>
-
+        <Button x:Name="Picture" Content="Picture" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Picture_Click" Height="40" Width="80"/>
+        <Button x:Name="SlideShow" Content="Slide Show&#10;    (WIP)" Click="SlideShow_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" Margin="80,0,0,0"/>
+        
         <Image x:Name="UpdateScreen" Source="Images/Background.jpg" Visibility="Collapsed" Margin="0,0,0.333,-13.333" Grid.RowSpan="2" Stretch="Fill"/>
         <Label x:Name="UpdateText1" Visibility="Collapsed" Content="App Update Available" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="280,25,253,0" FontSize="25" Height="44" Width="313" Grid.Row="1"/>
         <Label x:Name="UpdateText2" Visibility="Collapsed" Content="Do You Want To Update" HorizontalAlignment="Center" FontSize="15" Margin="347,90,330,240" Grid.Row="1" Width="169"/>
