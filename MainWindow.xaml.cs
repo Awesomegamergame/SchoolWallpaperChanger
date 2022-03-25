@@ -21,7 +21,8 @@ namespace SchoolWallpaperChanger
             CheckInternet.CheckInternetState();
             window = this;
             InitializeComponent();
-            if (CheckInternet.IsOnline) { Updater.Update(); }
+            MessageBox.Show("Warning this is a test build of version 1.1.0 I am not responsible if something bad happens to your computer by using any test build", "Test Build fe31f7a");
+            //if (CheckInternet.IsOnline) { Updater.Update(); }
         }
 
         private void Select_Click(object sender, RoutedEventArgs e)
