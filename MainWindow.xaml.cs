@@ -5,6 +5,8 @@ using Microsoft.Win32;
 using SchoolWallpaperChanger.Functions;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace SchoolWallpaperChanger
 {
@@ -57,6 +59,43 @@ namespace SchoolWallpaperChanger
                     break;
                 case 1:
                     MessageBox.Show("SlideShow");
+                    OpenFileDialog openFileDialogS = new OpenFileDialog
+                    {
+                        Title = "Choose Image",
+                        Filter = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.gif;*.apng",
+                        Multiselect = true
+                    };
+                    var dialogS = openFileDialogS;
+                    bool? resultS = dialogS.ShowDialog();
+                    if (resultS == true)
+                    {
+                        foreach(string Filename in dialogS.FileNames)
+                        {
+                            MessageBox.Show(Filename);
+                            SlideShowS.PictureList.Add(Filename);
+                        }
+                        foreach (string Filename in dialogS.SafeFileNames)
+                        {
+                            MessageBox.Show(Filename);
+                            SlideShowS.PictureNameList.Add(Filename);
+                        }
+                        Change.IsEnabled = true;
+                        BitmapImage btm = new BitmapImage(new Uri(dialogS.FileName));
+                        Window2.Source = btm;
+                        Window2.Stretch = Stretch.Uniform;
+                        NoWallpaper.Visibility = Visibility.Collapsed;
+
+                        //Resolution Stuff
+                        var img = System.Drawing.Image.FromFile(dialogS.FileName);
+                        var size = GetResolution.GetDisplayResolution();
+                        if (img.Width != size.Width || img.Height != size.Height)
+                        {
+                            Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
+                            Warning.Visibility = Visibility.Visible;
+                        }
+                        else
+                            Warning.Visibility = Visibility.Collapsed;
+                    }
                     break;
             }
             
@@ -64,10 +103,19 @@ namespace SchoolWallpaperChanger
         }
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-            Change.IsEnabled = false;
-            File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            RefreshUI.SetWallpaper(FileLocation);
-            MessageBox.Show("Wallpaper Changed");
+            switch (Selected)
+            {
+                case 0:
+                    Change.IsEnabled = false;
+                    File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+                    RefreshUI.SetWallpaper(FileLocation);
+                    MessageBox.Show("Wallpaper Changed");
+                    break;
+                case 1:
+                    Change.IsEnabled = false;
+                    SlideShowS.SlideShow();
+                    break;
+            }
         }
         #region Updates
         private void No_Click(object sender, RoutedEventArgs e)
