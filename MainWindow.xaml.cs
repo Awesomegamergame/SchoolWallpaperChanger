@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace SchoolWallpaperChanger
 {
@@ -15,6 +16,9 @@ namespace SchoolWallpaperChanger
         public string FileLocation;
         public static MainWindow window;
         public int Selected = 0;
+        public static bool Stopped = false;
+        List<string> PictureNameList = new List<string>();
+        List<string> PictureList = new List<string>();
 
         public MainWindow()
         {
@@ -70,16 +74,27 @@ namespace SchoolWallpaperChanger
                     bool? resultS = dialogS.ShowDialog();
                     if (resultS == true)
                     {
+                        PictureList.Clear();
+                        PictureNameList.Clear();
+                        int x = 0;
                         foreach(string Filename in dialogS.FileNames)
                         {
+                            x++;
                             MessageBox.Show(Filename);
-                            SlideShowS.PictureList.Add(Filename);
+                            PictureList.Add(Filename);
                         }
                         foreach (string Filename in dialogS.SafeFileNames)
                         {
                             MessageBox.Show(Filename);
-                            SlideShowS.PictureNameList.Add(Filename);
+                            PictureNameList.Add(Filename);
                         }
+                        if(x == 1)
+                        {
+                            MessageBox.Show("You need to select more than 1 image for the slideshow");
+                            Change.IsEnabled = false;
+                            break;
+                        }
+                        Stopped = false;
                         Change.IsEnabled = true;
                         BitmapImage btm = new BitmapImage(new Uri(dialogS.FileName));
                         Window2.Source = btm;
@@ -114,7 +129,8 @@ namespace SchoolWallpaperChanger
                     break;
                 case 1:
                     Change.IsEnabled = false;
-                    SlideShowS.SlideShow();
+                    var SL = new SlideShowS();
+                    SL.SlideShow(PictureNameList, PictureList);
                     break;
             }
         }
@@ -152,11 +168,40 @@ namespace SchoolWallpaperChanger
         private void SlideShow_Click(object sender, RoutedEventArgs e)
         {
             Selected = 1;
+            Change.Content = "Start";
+            Select.Content = "Select Images";
+            Picture.IsEnabled = true;
+            SlideShow.IsEnabled = false;
+            Change.IsEnabled = false;
+            Warning.Visibility = Visibility.Collapsed;
+            NoWallpaper.Visibility = Visibility.Visible;
+            NoWallpaper.Content = "No Images Selected";
         }
 
         private void Picture_Click(object sender, RoutedEventArgs e)
         {
             Selected = 0;
+            Change.Content = "Change";
+            Select.Content = "Select";
+            Picture.IsEnabled = false;
+            SlideShow.IsEnabled = true;
+            Change.IsEnabled = false;
+            Warning.Visibility = Visibility.Collapsed;
+            NoWallpaper.Visibility = Visibility.Visible;
+            NoWallpaper.Content = "No Wallpaper Selected";
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            Stopped = true;
+            Change.Visibility = Visibility.Visible;
+            Stop.Visibility = Visibility.Collapsed;
+            Select.Visibility = Visibility.Visible;
+            SlideShow.IsEnabled = false;
+            Picture.IsEnabled = true;
+            Change.IsEnabled = true;
+            Select.IsEnabled = true;
+            SlideShowS.End();
         }
     }
 }
