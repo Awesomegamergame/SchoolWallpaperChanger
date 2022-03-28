@@ -69,6 +69,8 @@ namespace SchoolWallpaperChanger
             NoWallpaper.Visibility = Visibility.Visible;
             Window3.Visibility = Visibility.Visible;
             NoWallpaper.Content = "No Images Selected";
+            TimeL.Visibility = Visibility.Visible;
+            Time.Visibility = Visibility.Visible;
         }
 
         private void Picture_Click(object sender, RoutedEventArgs e)
@@ -82,12 +84,15 @@ namespace SchoolWallpaperChanger
             Warning.Visibility = Visibility.Collapsed;
             NoWallpaper.Visibility = Visibility.Visible;
             Window3.Visibility = Visibility.Visible;
+            TimeL.Visibility = Visibility.Collapsed;
+            Time.Visibility = Visibility.Collapsed;
             NoWallpaper.Content = "No Wallpaper Selected";
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
             Stopped = true;
+            Time.IsEnabled = false;
             Change.Visibility = Visibility.Visible;
             Stop.Visibility = Visibility.Collapsed;
             Select.Visibility = Visibility.Visible;

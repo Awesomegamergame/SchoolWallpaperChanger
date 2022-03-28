@@ -18,9 +18,22 @@ namespace SchoolWallpaperChanger.Functions
                     MessageBox.Show("Wallpaper Changed");
                     break;
                 case 1:
+                    if(window.Time.Text.Equals(null) || window.Time.Text.Equals(""))
+                    {
+                        MessageBox.Show("Time cant be empty");
+                        break;
+                    }
+                    int time = int.Parse(window.Time.Text);
+                    if(time < 5)
+                    {
+                        MessageBox.Show("Time cant be less than 5 seconds");
+                        break;
+                    }
                     window.Change.IsEnabled = false;
+                    time *= 1000;
+                    window.Time.IsEnabled = false;
                     var SL = new SlideShowS();
-                    SL.SlideShow(SelectButton.PictureNameList, SelectButton.PictureList);
+                    SL.SlideShow(SelectButton.PictureNameList, SelectButton.PictureList, time);
                     break;
             }
         }

@@ -48,7 +48,6 @@ namespace SchoolWallpaperChanger.Functions
                     }
                     break;
                 case 1:
-                    MessageBox.Show("SlideShow");
                     OpenFileDialog openFileDialogS = new OpenFileDialog
                     {
                         Title = "Choose Image",
@@ -66,12 +65,10 @@ namespace SchoolWallpaperChanger.Functions
                         foreach (string Filename in dialogS.FileNames)
                         {
                             x++;
-                            MessageBox.Show(Filename);
                             PictureList.Add(Filename);
                         }
                         foreach (string Filename in dialogS.SafeFileNames)
                         {
-                            MessageBox.Show(Filename);
                             PictureNameList.Add(Filename);
                         }
                         if (x == 1)

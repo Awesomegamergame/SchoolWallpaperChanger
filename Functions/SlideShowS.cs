@@ -14,7 +14,7 @@ namespace SchoolWallpaperChanger.Functions
         public static Timer aTimer = new Timer();
         public List<string> PictureNameList = new List<string>();
         public List<string> PictureList = new List<string>();
-        public void SlideShow(List<string> PictureNameList, List<string> PictureList)
+        public void SlideShow(List<string> PictureNameList, List<string> PictureList, int Time)
         {
             window.Picture.IsEnabled = false;
             window.Stop.Visibility = Visibility.Visible;
@@ -39,7 +39,7 @@ namespace SchoolWallpaperChanger.Functions
             RefreshUI.SetWallpaper("");
             
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Interval = 5000;
+            aTimer.Interval = Time;
             aTimer.Enabled = true;
         }
         public void OnTimedEvent(object source, ElapsedEventArgs e)
