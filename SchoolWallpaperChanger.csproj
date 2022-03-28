@@ -69,10 +69,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Functions\ChangeButton.cs" />
     <Compile Include="Functions\CheckInternet.cs" />
     <Compile Include="Functions\FileDownloader.cs" />
     <Compile Include="Functions\GetResolution.cs" />
     <Compile Include="Functions\RefreshUI.cs" />
+    <Compile Include="Functions\SelectButton.cs" />
     <Compile Include="Functions\SlideShowS.cs" />
     <Compile Include="Functions\Updater.cs" />
     <Compile Include="MainWindow.xaml.cs">
