@@ -9,7 +9,7 @@ namespace SchoolWallpaperChanger
         public static MainWindow window;
         public static int Selected = 0;
         public static bool Stopped = false;
-        private Regex _regex = new Regex("[^0-9]+");
+        private readonly Regex _regex = new Regex("[^0-9]+");
         public MainWindow()
         {
             CheckInternet.CheckInternetState();
@@ -92,7 +92,7 @@ namespace SchoolWallpaperChanger
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
             Stopped = true;
-            Time.IsEnabled = false;
+            Time.IsEnabled = true;
             Change.Visibility = Visibility.Visible;
             Stop.Visibility = Visibility.Collapsed;
             Select.Visibility = Visibility.Visible;

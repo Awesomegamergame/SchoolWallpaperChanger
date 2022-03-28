@@ -36,7 +36,7 @@ namespace SchoolWallpaperChanger.Functions
             string Picture = PictureNameList[y];
             File.Copy($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
             y++;
-            RefreshUI.SetWallpaper("");
+            RefreshUI.SetWallpaper($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{Picture}");
             
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = Time;
@@ -48,7 +48,7 @@ namespace SchoolWallpaperChanger.Functions
                 y = 0;
             string Picture = PictureNameList[y];
             File.Copy($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            RefreshUI.SetWallpaper("");
+            RefreshUI.SetWallpaper($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{Picture}");
             y++;
         }
 
