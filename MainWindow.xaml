@@ -14,16 +14,17 @@
             <RowDefinition Height="23*"/>
             <RowDefinition Height="73*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Select" Content="Select" HorizontalAlignment="Left" Visibility="Visible" FontSize=" 16" Margin="73,0,0,69" Click="Select_Click" Width="177" Grid.Row="1" Height="60" VerticalAlignment="Bottom"/>
+        <Button x:Name="Select" Content="Select" HorizontalAlignment="Left" Visibility="Visible" FontSize="16" Margin="73,0,0,69" Click="Select_Click" Width="177" Grid.Row="1" Height="60" VerticalAlignment="Bottom"/>
         <Button x:Name="Change" Content="Change" Visibility="Visible" FontSize="16" Margin="0,0,73,69" IsEnabled="False" Click="Change_Click" Grid.Row="1" HorizontalAlignment="Right" Width="177" Height="60" VerticalAlignment="Bottom"/>
         <Button x:Name="Stop" Content="Stop" Visibility="Collapsed" FontSize="16" Margin="0,0,73,69" IsEnabled="True" Click="Stop_Click" Grid.Row="1" HorizontalAlignment="Right" Width="177" Height="60" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="Time" HorizontalAlignment="Center" Visibility="Visible" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" VerticalAlignment="Bottom" PreviewTextInput="TextBox_PreviewTextInput" Margin="0,0,0,69" Grid.Row="1" TextWrapping="Wrap" Width="178" Height="60"/>
         <Image x:Name="Window2" Source="Images/background2.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="74,50,74,160" Grid.RowSpan="2"/>
         <Image x:Name="Window3" Source="Images/background2.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="74,50,74,160" Grid.RowSpan="2"/>
         <Label x:Name="NoWallpaper" Content="No Wallpaper Selected" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="270,37,270,279" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="60" FontSize="30" Grid.Row="1"/>
         <Label x:Name="Warning" HorizontalAlignment="Center" Margin="0,0,0,135" Grid.Row="1" VerticalAlignment="Bottom"/>
         <Button x:Name="Picture" Content="Picture" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Picture_Click" Height="40" Width="80"/>
         <Button x:Name="SlideShow" Content="Slide Show&#10;    (WIP)" Click="SlideShow_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" Margin="80,0,0,0"/>
-        
+
         <Image x:Name="UpdateScreen" Source="Images/Background.jpg" Visibility="Collapsed" Margin="0,0,0.333,-13.333" Grid.RowSpan="2" Stretch="Fill"/>
         <Label x:Name="UpdateText1" Visibility="Collapsed" Content="App Update Available" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="280,25,253,0" FontSize="25" Height="44" Width="313" Grid.Row="1"/>
         <Label x:Name="UpdateText2" Visibility="Collapsed" Content="Do You Want To Update" HorizontalAlignment="Center" FontSize="15" Margin="347,90,330,240" Grid.Row="1" Width="169"/>

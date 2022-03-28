@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 using SchoolWallpaperChanger.Functions;
 
 namespace SchoolWallpaperChanger
@@ -8,6 +9,7 @@ namespace SchoolWallpaperChanger
         public static MainWindow window;
         public static int Selected = 0;
         public static bool Stopped = false;
+        private Regex _regex = new Regex("[^0-9]+");
         public MainWindow()
         {
             CheckInternet.CheckInternetState();
@@ -94,6 +96,14 @@ namespace SchoolWallpaperChanger
             Change.IsEnabled = true;
             Select.IsEnabled = true;
             SlideShowS.End();
+        }
+        private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+        private bool IsTextAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
         }
     }
 }
