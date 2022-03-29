@@ -1,5 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
 using System.Windows;
+using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using SchoolWallpaperChanger.Functions;
 
 namespace SchoolWallpaperChanger
@@ -9,6 +11,7 @@ namespace SchoolWallpaperChanger
         public static MainWindow window;
         public static int Selected = 0;
         public static bool Stopped = false;
+        public NotifyIcon ni = new NotifyIcon();
         private readonly Regex _regex = new Regex("[^0-9]+");
         public MainWindow()
         {
@@ -16,6 +19,26 @@ namespace SchoolWallpaperChanger
             window = this;
             InitializeComponent();
             if (CheckInternet.IsOnline) { Updater.Update(); }
+            #region Tray
+            ni.Icon = Properties.Resources.icon;
+            ni.Visible = false;
+            ni.DoubleClick +=
+            delegate (object sender, EventArgs args)
+            {
+                Show();
+                WindowState = WindowState.Normal;
+                ni.Visible = true;
+            };
+            #endregion
+        }
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                Hide();
+                ni.Visible = true;
+            }
+            base.OnStateChanged(e);
         }
         private void Select_Click(object sender, RoutedEventArgs e)
         {           
