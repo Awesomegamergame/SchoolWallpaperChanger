@@ -6,6 +6,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Windows;
 using System.Reflection;
+using static SchoolWallpaperChanger.MainWindow;
 
 namespace SchoolWallpaperChanger.Functions
 {
@@ -49,17 +50,17 @@ namespace SchoolWallpaperChanger.Functions
                 if (onlineVersion.IsDifferentThan(localVersion))
                 {
                     VersionDetector += 1;
-                    MainWindow.UpdateScreen_Image.Visibility = Visibility.Visible;
-                    MainWindow.Yes_Button.Visibility = Visibility.Visible;
-                    MainWindow.No_Button.Visibility = Visibility.Visible;
-                    MainWindow.UpdateText1_Label.Visibility = Visibility.Visible;
-                    MainWindow.UpdateText2_Label.Visibility = Visibility.Visible;
-                    MainWindow.LocalVersionObject.Visibility = Visibility.Visible;
-                    MainWindow.OnlineVersionObject.Visibility = Visibility.Visible;
-                    MainWindow.LocalVersionNumberObject.Content = localVersion;
-                    MainWindow.OnlineVersionNumberObject.Content = onlineVersion;
-                    MainWindow.LocalVersionNumberObject.Visibility = Visibility.Visible;
-                    MainWindow.OnlineVersionNumberObject.Visibility = Visibility.Visible;
+                    window.UpdateScreen.Visibility = Visibility.Visible;
+                    window.Yes.Visibility = Visibility.Visible;
+                    window.No.Visibility = Visibility.Visible;
+                    window.UpdateText1.Visibility = Visibility.Visible;
+                    window.UpdateText2.Visibility = Visibility.Visible;
+                    window.LocalVersion.Visibility = Visibility.Visible;
+                    window.OnlineVersion.Visibility = Visibility.Visible;
+                    window.LocalVersionNumber.Content = localVersion;
+                    window.OnlineVersionNumber.Content = onlineVersion;
+                    window.LocalVersionNumber.Visibility = Visibility.Visible;
+                    window.OnlineVersionNumber.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception ex)
@@ -90,7 +91,7 @@ namespace SchoolWallpaperChanger.Functions
 
         private static void LauncherDownload_DownloadProgressChanged(object sender, FileDownloader.DownloadProgress progress)
         {
-            MainWindow.UpdateDownloadBar.Value = progress.ProgressPercentage;
+            window.UpdateProgress.Value = progress.ProgressPercentage;
         }
 
         private static void DownloadGameCompletedCallback(object sender, AsyncCompletedEventArgs e)

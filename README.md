@@ -1,5 +1,25 @@
-# SchoolWallpaperChanger
+# School Wallpaper Changer
+[![Debug Build](https://github.com/awesomegamergame/SchoolWallpaperChanger/actions/workflows/DebugBuild.yml/badge.svg)](https://github.com/awesomegamergame/SchoolWallpaperChanger/actions/workflows/DebugBuild.yml)
 
-This is a wpf app that will change the wallpaper on school computers that dont allow the desktop background changed
+A .NET Framework 4.7.2, C# and WPF app which enables you to change the wallpaper of computer's with restricted permissions (computer's managed by organizations such as schools or businesses). Latest stable Release is Version `1.1.0`.
 
-This is a challenge from someone and if you are that person I accept that challenge
+
+## Current Features 🛰
+
+Adds a Slideshow or Static Wallpaper image to your computer's background:
+
+![DemoImage](.github/ReadMeResources/DemoImage.png)
+
+
+## How to Contribute 🐱
+
+Fork and clone the repository to your computer and open in Visual Studio 2022 or 2019. 
+
+Submit a pull request following the PR template. 
+
+### Planned Features for Future Releases 🚀
+
+More features coming soon!
+
+### Issues ⛔
+If you experience any issues when running School Wallpaper Changer, report an Issue following the issues template.
