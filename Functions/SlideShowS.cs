@@ -11,11 +11,14 @@ namespace SchoolWallpaperChanger.Functions
     {
         public int x;
         public int y;
+        // Replaced repeated calls to the application path with field AppllicationDataPath to improve code maintainability. 
+        public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static Timer aTimer = new Timer();
         public List<string> PictureNameList = new List<string>();
         public List<string> PictureList = new List<string>();
         public void SlideShow(List<string> PictureNameList, List<string> PictureList, int Time)
         {
+
             window.Picture.IsEnabled = false;
             window.Stop.Visibility = Visibility.Visible;
             window.Change.Visibility = Visibility.Collapsed;
@@ -24,19 +27,19 @@ namespace SchoolWallpaperChanger.Functions
             this.PictureList = PictureList;
             x = 0;
             y = 0;
-            if (Directory.Exists($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow"))
-                DeleteDirectory($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow");
-            if (!Directory.Exists($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow"))
-                Directory.CreateDirectory($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow");
+            if (Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
+                DeleteDirectory($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow");
+            if (!Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
+                Directory.CreateDirectory($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow");
             foreach (string PictureLocation in PictureList)
             {
-                File.Copy(PictureLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{PictureNameList[x]}");
+                File.Copy(PictureLocation, $@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{PictureNameList[x]}");
                 x++;
             }
             string Picture = PictureNameList[y];
-            File.Copy($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
             y++;
-            RefreshUI.SetWallpaper($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{Picture}");
+            RefreshUI.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
             
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = Time;
@@ -47,8 +50,8 @@ namespace SchoolWallpaperChanger.Functions
             if (y >= PictureNameList.Count)
                 y = 0;
             string Picture = PictureNameList[y];
-            File.Copy($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            RefreshUI.SetWallpaper($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\SlideShow\{Picture}");
+            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+            RefreshUI.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
             y++;
         }
 
