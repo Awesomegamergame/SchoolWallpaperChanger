@@ -11,8 +11,7 @@ namespace SchoolWallpaperChanger.Functions
     {
         public int x;
         public int y;
-        // Replaced repeated calls to the application path with field AppllicationDataPath to improve code maintainability. 
-        public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static Timer aTimer = new Timer();
         public List<string> PictureNameList = new List<string>();
         public List<string> PictureList = new List<string>();

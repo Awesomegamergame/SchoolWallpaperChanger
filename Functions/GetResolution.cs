@@ -9,17 +9,12 @@ namespace SchoolWallpaperChanger.Functions
     {
         [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
         public static extern int GetDeviceCaps(IntPtr hDC, int nIndex);
-        public enum DeviceCap
-        {
-            VERTRES = 10,
-            DESKTOPVERTRES = 117
-        }
         public static double GetWindowsScreenScalingFactor(bool percentage = true)
         {
             Graphics GraphicsObject = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr DeviceContextHandle = GraphicsObject.GetHdc();
-            int LogicalScreenHeight = GetDeviceCaps(DeviceContextHandle, (int)DeviceCap.VERTRES);
-            int PhysicalScreenHeight = GetDeviceCaps(DeviceContextHandle, (int)DeviceCap.DESKTOPVERTRES);
+            int LogicalScreenHeight = GetDeviceCaps(DeviceContextHandle, 10);
+            int PhysicalScreenHeight = GetDeviceCaps(DeviceContextHandle, 117);
             double ScreenScalingFactor = Math.Round(PhysicalScreenHeight / (double)LogicalScreenHeight, 2);
             if (percentage)
             {
