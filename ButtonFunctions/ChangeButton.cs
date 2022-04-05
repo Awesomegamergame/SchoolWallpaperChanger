@@ -7,14 +7,15 @@ namespace SchoolWallpaperChanger.Functions
 {
     internal class ChangeButton
     {
-        public static void Change()
+        public static string FileLocation;
+        public static void Change(int Selected)
         {
             switch (Selected)
             {
                 case 0:
                     window.Change.IsEnabled = false;
-                    File.Copy(SelectButton.FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-                    RefreshUI.SetWallpaper(SelectButton.FileLocation);
+                    File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+                    UIFunctions.SetWallpaper(FileLocation);
                     MessageBox.Show("Wallpaper Changed");
                     break;
                 case 1:
@@ -33,7 +34,7 @@ namespace SchoolWallpaperChanger.Functions
                     time *= 1000;
                     window.Time.IsEnabled = false;
                     var SL = new SlideShowS();
-                    SL.SlideShow(SelectButton.PictureNameList, SelectButton.PictureList, time);
+                    SL.SlideShow(time);
                     break;
             }
         }

@@ -85,12 +85,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ButtonData\ChangeButton.cs" />
-    <Compile Include="Functions\CheckInternet.cs" />
+    <Compile Include="ButtonFunctions\ChangeButton.cs" />
     <Compile Include="Functions\FileDownloader.cs" />
-    <Compile Include="Functions\GetResolution.cs" />
-    <Compile Include="Functions\RefreshUI.cs" />
-    <Compile Include="ButtonData\SelectButton.cs" />
+    <Compile Include="Functions\UIFunctions.cs" />
+    <Compile Include="ButtonFunctions\SelectButton.cs" />
     <Compile Include="Functions\SlideShowS.cs" />
     <Compile Include="Functions\Updater.cs" />
     <Compile Include="MainWindow.xaml.cs">

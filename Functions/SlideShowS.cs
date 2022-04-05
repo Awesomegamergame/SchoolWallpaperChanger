@@ -13,17 +13,15 @@ namespace SchoolWallpaperChanger.Functions
         public int y;
         public string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static Timer aTimer = new Timer();
-        public List<string> PictureNameList = new List<string>();
-        public List<string> PictureList = new List<string>();
-        public void SlideShow(List<string> PictureNameList, List<string> PictureList, int Time)
+        public static List<string> PictureNameList = new List<string>();
+        public static List<string> PictureList = new List<string>();
+        public void SlideShow(int Time)
         {
 
             window.Picture.IsEnabled = false;
             window.Stop.Visibility = Visibility.Visible;
             window.Change.Visibility = Visibility.Collapsed;
             window.Select.IsEnabled = false;
-            this.PictureNameList = PictureNameList;
-            this.PictureList = PictureList;
             x = 0;
             y = 0;
             if (Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
@@ -38,7 +36,7 @@ namespace SchoolWallpaperChanger.Functions
             string Picture = PictureNameList[y];
             File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
             y++;
-            RefreshUI.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
+            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
             
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = Time;
@@ -50,13 +48,22 @@ namespace SchoolWallpaperChanger.Functions
                 y = 0;
             string Picture = PictureNameList[y];
             File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            RefreshUI.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
+            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
             y++;
         }
 
         public static void End()
         {
             aTimer.Close();
+            Stopped = true;
+            window.Time.IsEnabled = true;
+            window.Change.Visibility = Visibility.Visible;
+            window.Stop.Visibility = Visibility.Collapsed;
+            window.Select.Visibility = Visibility.Visible;
+            window.SlideShow.IsEnabled = false;
+            window.Picture.IsEnabled = true;
+            window.Change.IsEnabled = true;
+            window.Select.IsEnabled = true;
         }
 
         public static void DeleteDirectory(string target_dir)
