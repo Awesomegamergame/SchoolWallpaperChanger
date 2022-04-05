@@ -18,7 +18,7 @@ namespace SchoolWallpaperChanger
             CheckInternet.CheckInternetState();
             window = this;
             InitializeComponent();
-            if (CheckInternet.IsOnline) { Updater.Update(); }
+            //if (CheckInternet.IsOnline) { Updater.Update(); }
             #region Tray
             ni.Icon = Properties.Resources.icon;
             ni.Visible = false;
