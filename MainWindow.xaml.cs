@@ -27,13 +27,19 @@ namespace SchoolWallpaperChanger
             {
                 Show();
                 WindowState = WindowState.Normal;
-                ni.Visible = true;
+                ni.Visible = false;
             };
             #endregion
         }
         #region Tray
         protected override void OnStateChanged(EventArgs e)
         {
+            if(WindowState == WindowState.Normal)
+            {
+                window.Activate();
+                Show();
+                ni.Visible = false;
+            }
             if (WindowState == WindowState.Minimized)
             {
                 Hide();
