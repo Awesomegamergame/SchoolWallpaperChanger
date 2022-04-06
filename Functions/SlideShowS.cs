@@ -9,34 +9,29 @@ namespace SchoolWallpaperChanger.Functions
 {
     internal class SlideShowS
     {
-        public int x;
-        public int y;
+        public int y = 1;
         public string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static Timer aTimer = new Timer();
-        public static List<string> PictureNameList = new List<string>();
         public static List<string> PictureList = new List<string>();
         public void SlideShow(int Time)
         {
-
+            int x = 0;
             window.Picture.IsEnabled = false;
             window.Stop.Visibility = Visibility.Visible;
             window.Change.Visibility = Visibility.Collapsed;
             window.Select.IsEnabled = false;
-            x = 0;
-            y = 0;
             if (Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
                 DeleteDirectory($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow");
             if (!Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
                 Directory.CreateDirectory($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow");
             foreach (string PictureLocation in PictureList)
             {
-                File.Copy(PictureLocation, $@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{PictureNameList[x]}");
+                File.Copy(PictureLocation, $@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}");
                 x++;
             }
-            string Picture = PictureNameList[y];
-            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            y++;
-            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
+            x = 0;
+            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}");
             
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = Time;
@@ -44,11 +39,10 @@ namespace SchoolWallpaperChanger.Functions
         }
         public void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            if (y >= PictureNameList.Count)
+            if (y >= PictureList.Count)
                 y = 0;
-            string Picture = PictureNameList[y];
-            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
+            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}");
             y++;
         }
 

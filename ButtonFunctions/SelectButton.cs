@@ -57,16 +57,11 @@ namespace SchoolWallpaperChanger.Functions
                     {
                         window.Window3.Visibility = Visibility.Collapsed;
                         SlideShowS.PictureList.Clear();
-                        SlideShowS.PictureNameList.Clear();
                         int x = 0;
                         foreach (string Filename in dialogS.FileNames)
                         {
                             x++;
                             SlideShowS.PictureList.Add(Filename);
-                        }
-                        foreach (string Filename in dialogS.SafeFileNames)
-                        {
-                            SlideShowS.PictureNameList.Add(Filename);
                         }
                         if (x == 1)
                         {
