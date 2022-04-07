@@ -27,7 +27,12 @@ namespace SchoolWallpaperChanger.Functions
                         window.Window3.Visibility = Visibility.Collapsed;
                         ChangeButton.FileLocation = dialog.FileName;
                         window.Change.IsEnabled = true;
-                        BitmapImage btm = new BitmapImage(new Uri(dialog.FileName));
+                        var btm = new BitmapImage();
+                        btm.BeginInit();
+                        btm.UriSource = new Uri(dialog.FileName);
+                        btm.DecodePixelHeight = 500;
+                        btm.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        btm.EndInit();
                         window.Window2.Source = btm;
                         window.Window2.Stretch = Stretch.Uniform;
                         window.NoWallpaper.Visibility = Visibility.Collapsed;
