@@ -44,6 +44,7 @@ namespace SchoolWallpaperChanger
             {
                 Hide();
                 ni.Visible = true;
+                Window2.Source = null;
             }
             base.OnStateChanged(e);
         }
