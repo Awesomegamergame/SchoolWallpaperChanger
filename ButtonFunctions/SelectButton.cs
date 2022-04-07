@@ -76,7 +76,12 @@ namespace SchoolWallpaperChanger.Functions
                         }
                         Stopped = false;
                         window.Change.IsEnabled = true;
-                        BitmapImage btm = new BitmapImage(new Uri(dialogS.FileName));
+                        var btm = new BitmapImage();
+                        btm.BeginInit();
+                        btm.UriSource = new Uri(dialogS.FileName);
+                        btm.DecodePixelHeight = 500;
+                        btm.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        btm.EndInit();
                         window.Window2.Source = btm;
                         window.Window2.Stretch = Stretch.Uniform;
                         window.NoWallpaper.Visibility = Visibility.Collapsed;
