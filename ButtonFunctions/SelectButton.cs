@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static SchoolWallpaperChanger.MainWindow;
@@ -32,10 +33,13 @@ namespace SchoolWallpaperChanger.Functions
                         btm.UriSource = new Uri(dialog.FileName);
                         btm.DecodePixelHeight = 500;
                         btm.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        btm.CacheOption = BitmapCacheOption.None;
                         btm.EndInit();
                         window.Window2.Source = btm;
                         window.Window2.Stretch = Stretch.Uniform;
                         window.NoWallpaper.Visibility = Visibility.Collapsed;
+
+                        GC.Collect();
 
                         //Resolution Stuff
                         var img = System.Drawing.Image.FromFile(dialog.FileName);
@@ -81,6 +85,7 @@ namespace SchoolWallpaperChanger.Functions
                         btm.UriSource = new Uri(dialogS.FileName);
                         btm.DecodePixelHeight = 500;
                         btm.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        btm.CacheOption = BitmapCacheOption.None;
                         btm.EndInit();
                         window.Window2.Source = btm;
                         window.Window2.Stretch = Stretch.Uniform;
