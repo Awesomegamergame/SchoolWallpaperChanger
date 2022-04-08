@@ -49,8 +49,9 @@ namespace SchoolWallpaperChanger
         }
         #endregion
         private void Select_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             SelectButton.Select(Selected);
+            GC.Collect();
         }
         private void Change_Click(object sender, RoutedEventArgs e)
         {

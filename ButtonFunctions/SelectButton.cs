@@ -39,8 +39,6 @@ namespace SchoolWallpaperChanger.Functions
                         window.Window2.Stretch = Stretch.Uniform;
                         window.NoWallpaper.Visibility = Visibility.Collapsed;
 
-                        GC.Collect();
-
                         //Resolution Stuff
                         var img = System.Drawing.Image.FromFile(dialog.FileName);
                         var size = UIFunctions.GetDisplayResolution();
