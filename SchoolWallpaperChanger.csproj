@@ -86,6 +86,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ButtonFunctions\ChangeButton.cs" />
+    <Compile Include="Functions\Config.cs" />
     <Compile Include="Functions\FileDownloader.cs" />
     <Compile Include="Functions\UIFunctions.cs" />
     <Compile Include="ButtonFunctions\SelectButton.cs" />

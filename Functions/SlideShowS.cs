@@ -32,7 +32,8 @@ namespace SchoolWallpaperChanger.Functions
             x = 0;
             File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
             UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}");
-            
+            settings.Write("Timer", (Time / 1000).ToString());
+            settings.Write("SlideShow", "true");
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = Time;
             aTimer.Enabled = true;
@@ -51,6 +52,7 @@ namespace SchoolWallpaperChanger.Functions
             aTimer.Close();
             Stopped = true;
             window.Time.IsEnabled = true;
+            settings.Write("Slideshow", "false");
             window.Change.Visibility = Visibility.Visible;
             window.Stop.Visibility = Visibility.Collapsed;
             window.Select.Visibility = Visibility.Visible;

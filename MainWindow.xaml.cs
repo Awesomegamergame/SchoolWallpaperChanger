@@ -13,11 +13,23 @@ namespace SchoolWallpaperChanger
         public static bool Stopped = false;
         public NotifyIcon ni = new NotifyIcon();
         private readonly Regex _regex = new Regex("[^0-9]+");
+        public static IniFile settings = new IniFile("Settings.ini");
         public MainWindow()
         {
             Updater.CheckInternetState();
             window = this;
             InitializeComponent();
+            if (!settings.KeyExists("Startup"))
+                settings.Write("Startup", "false");
+            if (!settings.KeyExists("Mode"))
+                settings.Write("Mode", "Picture");
+            else
+            {
+                if (settings.Read("Mode").Equals("Slideshow"))
+                {
+                    SlideShow_Click();
+                }
+            }
             //if (CheckInternet.IsOnline) { Updater.Update(); }
             #region Tray
             ni.Icon = Properties.Resources.icon;
@@ -102,6 +114,7 @@ namespace SchoolWallpaperChanger
             NoWallpaper.Content = "No Images Selected";
             TimeL.Visibility = Visibility.Visible;
             Time.Visibility = Visibility.Visible;
+            settings.Write("Mode", "Slideshow");
         }
         private void Picture_Click(object sender, RoutedEventArgs e)
         {
@@ -117,6 +130,7 @@ namespace SchoolWallpaperChanger
             TimeL.Visibility = Visibility.Collapsed;
             Time.Visibility = Visibility.Collapsed;
             NoWallpaper.Content = "No Wallpaper Selected";
+            settings.Write("Mode", "Picture");
         }
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
