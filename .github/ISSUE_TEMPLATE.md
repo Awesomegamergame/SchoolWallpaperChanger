@@ -12,10 +12,10 @@
 
 * **Please tell us about your environment:**
   
-  - Version: `V1.1.0`
-  - Operating System: 
-  - Is this a school computer:
-  - List any other information you may think may be relevant here:
+  - Version: `V1.2.0`
+  - **Operating System:** 
+  - **Is this a school computer:** 
+  - **List any other information you may think may be relevant here:** 
 
 
 
