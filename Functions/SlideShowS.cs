@@ -10,7 +10,7 @@ namespace SchoolWallpaperChanger.Functions
     internal class SlideShowS
     {
         public int y = 1;
-        public string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static Timer aTimer = new Timer();
         public static List<string> PictureList = new List<string>();
         public void SlideShow(int Time)

@@ -1,15 +1,17 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using SchoolWallpaperChanger.Functions;
+using SchoolWallpaperChanger.ButtonFunctions;
 
 namespace SchoolWallpaperChanger
 {
     public partial class MainWindow : Window
     {
         public static MainWindow window;
-        public int Selected = 0;
+        public static int Selected = 0;
         public static bool Stopped = false;
         public NotifyIcon ni = new NotifyIcon();
         private readonly Regex _regex = new Regex("[^0-9]+");
@@ -19,16 +21,12 @@ namespace SchoolWallpaperChanger
             Updater.CheckInternetState();
             window = this;
             InitializeComponent();
-            if (!settings.KeyExists("Startup"))
-                settings.Write("Startup", "false");
-            if (!settings.KeyExists("Mode"))
-                settings.Write("Mode", "Picture");
+            if (!File.Exists("Settings.ini"))
+                Config.NewConfig();
             else
             {
-                if (settings.Read("Mode").Equals("Slideshow"))
-                {
-                    SlideShow_Click();
-                }
+                Config.ReadConfig();
+                Startup.Start();
             }
             //if (CheckInternet.IsOnline) { Updater.Update(); }
             #region Tray
@@ -102,35 +100,11 @@ namespace SchoolWallpaperChanger
         #endregion
         private void SlideShow_Click(object sender, RoutedEventArgs e)
         {
-            Selected = 1;
-            Change.Content = "Start";
-            Select.Content = "Select Images";
-            Picture.IsEnabled = true;
-            SlideShow.IsEnabled = false;
-            Change.IsEnabled = false;
-            Warning.Visibility = Visibility.Collapsed;
-            NoWallpaper.Visibility = Visibility.Visible;
-            Window3.Visibility = Visibility.Visible;
-            NoWallpaper.Content = "No Images Selected";
-            TimeL.Visibility = Visibility.Visible;
-            Time.Visibility = Visibility.Visible;
-            settings.Write("Mode", "Slideshow");
+            ButtonClick.SlideShow();
         }
         private void Picture_Click(object sender, RoutedEventArgs e)
         {
-            Selected = 0;
-            Change.Content = "Change";
-            Select.Content = "Select";
-            Picture.IsEnabled = false;
-            SlideShow.IsEnabled = true;
-            Change.IsEnabled = false;
-            Warning.Visibility = Visibility.Collapsed;
-            NoWallpaper.Visibility = Visibility.Visible;
-            Window3.Visibility = Visibility.Visible;
-            TimeL.Visibility = Visibility.Collapsed;
-            Time.Visibility = Visibility.Collapsed;
-            NoWallpaper.Content = "No Wallpaper Selected";
-            settings.Write("Mode", "Picture");
+            ButtonClick.Picture();
         }
         private void Stop_Click(object sender, RoutedEventArgs e)
         {

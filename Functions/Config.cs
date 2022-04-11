@@ -1,7 +1,8 @@
 ﻿using System.IO;
+using System.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
+using SchoolWallpaperChanger.ButtonFunctions;
 
 namespace SchoolWallpaperChanger.Functions
 {
@@ -30,13 +31,27 @@ namespace SchoolWallpaperChanger.Functions
         {
             WritePrivateProfileString(Section ?? EXE, Key, Value, Path);
         }
-        public void DeleteKey(string Key, string Section = null)
-        {
-            Write(Key, null, Section ?? EXE);
-        }
         public bool KeyExists(string Key, string Section = null)
         {
             return Read(Key, Section).Length > 0;
+        }
+    }
+    public class Config
+    {
+        public static void NewConfig()
+        {
+            MainWindow.settings.Write("Startup", "false");
+            MainWindow.settings.Write("Mode", "picture");
+            MainWindow.settings.Write("SlideShow", "false");
+            MainWindow.settings.Write("Timer", "5");
+        }
+        public static void ReadConfig()
+        {
+            if (MainWindow.settings.Read("Mode").Equals("slideshow"))
+                ButtonClick.SlideShow();
+            else if (MainWindow.settings.Read("Mode").Equals("picture"))
+                ButtonClick.Picture();
+            
         }
     }
 }

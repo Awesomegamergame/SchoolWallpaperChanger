@@ -37,6 +37,13 @@ namespace SchoolWallpaperChanger.Functions
                     var SL = new SlideShowS();
                     SL.SlideShow(time);
                     break;
+                case 2:
+                    window.Change.IsEnabled = false;
+                    File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+                    UIFunctions.SetWallpaper(FileLocation);
+                    MessageBox.Show("Wallpaper Changed");
+                    MainWindow.Selected = 0;
+                    break;
             }
         }
     }

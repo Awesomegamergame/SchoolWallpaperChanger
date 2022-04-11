@@ -85,9 +85,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ButtonFunctions\ButtonClick.cs" />
     <Compile Include="ButtonFunctions\ChangeButton.cs" />
     <Compile Include="Functions\Config.cs" />
     <Compile Include="Functions\FileDownloader.cs" />
+    <Compile Include="Functions\Startup.cs" />
     <Compile Include="Functions\UIFunctions.cs" />
     <Compile Include="ButtonFunctions\SelectButton.cs" />
     <Compile Include="Functions\SlideShowS.cs" />

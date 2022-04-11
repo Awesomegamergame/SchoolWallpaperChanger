@@ -99,6 +99,10 @@ namespace SchoolWallpaperChanger.Functions
                             window.Warning.Visibility = Visibility.Collapsed;
                     }
                     break;
+                case 2:
+                    MainWindow.Selected = 0;
+                    Select(MainWindow.Selected);
+                    break;
             }
         }
     }
