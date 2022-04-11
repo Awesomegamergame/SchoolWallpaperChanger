@@ -21,7 +21,7 @@
         <TextBox x:Name="Time" HorizontalAlignment="Center" Visibility="Collapsed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" VerticalAlignment="Bottom" PreviewTextInput="TextBox_PreviewTextInput" Margin="0,0,0,69" Grid.Row="1" TextWrapping="Wrap" Width="178" Height="30"/>
         <Image x:Name="Window2" Source="Images/background2.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="74,50,74,160" Grid.RowSpan="2"/>
         <Image x:Name="Window3" Source="Images/background2.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="74,50,74,160" Grid.RowSpan="2"/>
-        <Label x:Name="NoWallpaper" Content="No Wallpaper Selected" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="270,37,270,279" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="60" FontSize="30" Grid.Row="1"/>
+        <Label x:Name="NoWallpaper" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="270,37,270,279" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="60" FontSize="30" Grid.Row="1"/>
         <Label x:Name="Warning" HorizontalAlignment="Center" Margin="0,0,0,135" Grid.Row="1" VerticalAlignment="Bottom"/>
         <Button x:Name="Picture" Content="Picture" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Picture_Click" Height="40" Width="80"/>
         <Button x:Name="SlideShow" Content="Slide Show" Click="SlideShow_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" Margin="80,0,0,0"/>

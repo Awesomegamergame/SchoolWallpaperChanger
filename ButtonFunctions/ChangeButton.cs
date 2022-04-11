@@ -41,7 +41,7 @@ namespace SchoolWallpaperChanger.Functions
                     window.Change.IsEnabled = false;
                     File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
                     UIFunctions.SetWallpaper(FileLocation);
-                    MessageBox.Show("Wallpaper Changed");
+                    MessageBox.Show("Wallpaper Reapplied");
                     MainWindow.Selected = 0;
                     break;
             }

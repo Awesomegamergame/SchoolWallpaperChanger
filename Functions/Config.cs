@@ -51,7 +51,8 @@ namespace SchoolWallpaperChanger.Functions
                 ButtonClick.SlideShow();
             else if (MainWindow.settings.Read("Mode").Equals("picture"))
                 ButtonClick.Picture();
-            
+            if (MainWindow.settings.KeyExists("Timer"))
+                MainWindow.window.Time.Text = MainWindow.settings.Read("Timer");
         }
     }
 }

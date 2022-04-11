@@ -13,11 +13,11 @@ namespace SchoolWallpaperChanger.Functions
         {
             if(File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0"))
                 SetPicture();
-            SetSlideShow();
+            if (File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0"))
+                SetSlideShow();
         }
         public static void SetPicture()
         {
-            window.Window3.Visibility = Visibility.Collapsed;
             var btm = new BitmapImage();
             btm.BeginInit();
             btm.DecodePixelHeight = 500;
@@ -26,9 +26,7 @@ namespace SchoolWallpaperChanger.Functions
             btm.EndInit();
             window.Window2.Source = btm;
             ChangeButton.FileLocation = $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0";
-            Selected = 2;
             window.Window2.Stretch = Stretch.Uniform;
-            window.NoWallpaper.Visibility = Visibility.Collapsed;
 
             //Resolution Stuff
             var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0");
@@ -40,11 +38,29 @@ namespace SchoolWallpaperChanger.Functions
             }
             else
                 window.Warning.Visibility = Visibility.Collapsed;
-
         }
         public static void SetSlideShow()
         {
-            //TODO: Set last group of slide show pictures as the starup slideshow
+            var btm = new BitmapImage();
+            btm.BeginInit();
+            btm.DecodePixelHeight = 500;
+            btm.UriSource = new Uri($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0");
+            btm.CacheOption = BitmapCacheOption.OnLoad;
+            btm.EndInit();
+            window.Window3.Source = btm;
+            ChangeButton.FileLocation = $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0";
+            window.Window3.Stretch = Stretch.Uniform;
+
+            //Resolution Stuff
+            var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0");
+            var size = UIFunctions.GetDisplayResolution();
+            if (img.Width != size.Width || img.Height != size.Height)
+            {
+                window.Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
+                window.Warning.Visibility = Visibility.Visible;
+            }
+            else
+                window.Warning.Visibility = Visibility.Collapsed;
         }
     }
 }

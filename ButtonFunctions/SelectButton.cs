@@ -23,7 +23,6 @@ namespace SchoolWallpaperChanger.Functions
                     bool? result = dialog.ShowDialog();
                     if (result == true)
                     {
-                        window.Window3.Visibility = Visibility.Collapsed;
                         ChangeButton.FileLocation = dialog.FileName;
                         window.Change.IsEnabled = true;
                         var btm = new BitmapImage();
@@ -60,7 +59,6 @@ namespace SchoolWallpaperChanger.Functions
                     bool? resultS = dialogS.ShowDialog();
                     if (resultS == true)
                     {
-                        window.Window3.Visibility = Visibility.Collapsed;
                         SlideShowS.PictureList.Clear();
                         int x = 0;
                         foreach (string Filename in dialogS.FileNames)
@@ -83,8 +81,8 @@ namespace SchoolWallpaperChanger.Functions
                         btm.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                         btm.CacheOption = BitmapCacheOption.None;
                         btm.EndInit();
-                        window.Window2.Source = btm;
-                        window.Window2.Stretch = Stretch.Uniform;
+                        window.Window3.Source = btm;
+                        window.Window3.Stretch = Stretch.Uniform;
                         window.NoWallpaper.Visibility = Visibility.Collapsed;
 
                         //Resolution Stuff

@@ -27,6 +27,7 @@ namespace SchoolWallpaperChanger
             {
                 Config.ReadConfig();
                 Startup.Start();
+                GC.Collect();
             }
             //if (CheckInternet.IsOnline) { Updater.Update(); }
             #region Tray

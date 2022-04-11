@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.IO;
 using System.Windows;
+using SchoolWallpaperChanger.Functions;
 using static SchoolWallpaperChanger.MainWindow;
 
 namespace SchoolWallpaperChanger.ButtonFunctions
@@ -13,11 +14,20 @@ namespace SchoolWallpaperChanger.ButtonFunctions
             window.Select.Content = "Select Images";
             window.Picture.IsEnabled = true;
             window.SlideShow.IsEnabled = false;
-            window.Change.IsEnabled = false;
+            if (File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0"))
+            {
+                window.NoWallpaper.Content = "";
+                window.Change.IsEnabled = true;
+            }
+            else
+            {
+                window.NoWallpaper.Content = "No Images Selected";
+                window.Change.IsEnabled = false;
+            }
             window.Warning.Visibility = Visibility.Collapsed;
             window.NoWallpaper.Visibility = Visibility.Visible;
             window.Window3.Visibility = Visibility.Visible;
-            window.NoWallpaper.Content = "No Images Selected";
+            window.Window2.Visibility = Visibility.Collapsed;
             window.TimeL.Visibility = Visibility.Visible;
             window.Time.Visibility = Visibility.Visible;
             settings.Write("Mode", "slideshow");
@@ -28,14 +38,23 @@ namespace SchoolWallpaperChanger.ButtonFunctions
             window.Change.Content = "Change";
             window.Select.Content = "Select";
             window.Picture.IsEnabled = false;
+            if (File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0"))
+            {
+                window.NoWallpaper.Content = "";
+                window.Change.IsEnabled = true;
+            }
+            else
+            {
+                window.NoWallpaper.Content = "No Wallpaper Selected";
+                window.Change.IsEnabled = false;
+            }
             window.SlideShow.IsEnabled = true;
-            window.Change.IsEnabled = false;
             window.Warning.Visibility = Visibility.Collapsed;
             window.NoWallpaper.Visibility = Visibility.Visible;
-            window.Window3.Visibility = Visibility.Visible;
+            window.Window3.Visibility = Visibility.Collapsed;
+            window.Window2.Visibility= Visibility.Visible;
             window.TimeL.Visibility = Visibility.Collapsed;
             window.Time.Visibility = Visibility.Collapsed;
-            window.NoWallpaper.Content = "No Wallpaper Selected";
             settings.Write("Mode", "picture");
         }
     }
