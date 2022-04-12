@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -72,6 +73,17 @@ namespace SchoolWallpaperChanger.Functions
                             window.Change.IsEnabled = false;
                             break;
                         }
+                        x = 0;
+                        if (Directory.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
+                            SlideShowS.DeleteDirectory($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow");
+                        if (!Directory.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
+                            Directory.CreateDirectory($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow");
+                        foreach (string PictureLocation in SlideShowS.PictureList)
+                        {
+                            File.Copy(PictureLocation, $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}");
+                            x++;
+                        }
+                        settings.Write("PictureCount", SlideShowS.PictureList.Count.ToString());
                         Stopped = false;
                         window.Change.IsEnabled = true;
                         var btm = new BitmapImage();
