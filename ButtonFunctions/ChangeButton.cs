@@ -8,16 +8,15 @@ namespace SchoolWallpaperChanger.Functions
     internal class ChangeButton
     {
         public static string FileLocation;
+        public static string PicLocation;
         public static void Change(int Selected)
         {
             switch (Selected)
             {
                 case 0:
-                    window.Change.IsEnabled = false;
-                    File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-                    File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\0", true);
-                    UIFunctions.SetWallpaper(FileLocation);
+                    UIFunctions.SetWallpaper(PicLocation);
                     MessageBox.Show("Wallpaper Changed");
+                    MainWindow.Selected = 2;
                     break;
                 case 1:
                     if(window.Time.Text.Equals(null) || window.Time.Text.Equals(""))
@@ -34,15 +33,16 @@ namespace SchoolWallpaperChanger.Functions
                     window.Change.IsEnabled = false;
                     time *= 1000;
                     window.Time.IsEnabled = false;
+                    int CP = 0;
+                    if (int.Parse(settings.Read("CurrentPicture")) != CP && int.Parse(settings.Read("CurrentPicture")) < int.Parse(settings.Read("PictureCount")))
+                        CP = int.Parse(settings.Read("CurrentPicture"));
                     var SL = new SlideShowS();
-                    SL.SlideShow(time);
+                    SL.SlideShow(time, CP);
                     break;
                 case 2:
-                    window.Change.IsEnabled = false;
-                    File.Copy(FileLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+                    File.Copy(PicLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
                     UIFunctions.SetWallpaper(FileLocation);
                     MessageBox.Show("Wallpaper Reapplied");
-                    MainWindow.Selected = 0;
                     break;
             }
         }

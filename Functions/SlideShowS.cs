@@ -13,14 +13,17 @@ namespace SchoolWallpaperChanger.Functions
         public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static Timer aTimer = new Timer();
         public static List<string> PictureList = new List<string>();
-        public void SlideShow(int Time)
+        public void SlideShow(int Time, int CP)
         {
-            int x = 0;
+            int x;
             window.Picture.IsEnabled = false;
             window.Stop.Visibility = Visibility.Visible;
             window.Change.Visibility = Visibility.Collapsed;
             window.Select.IsEnabled = false;
-            
+            if (CP <= -1)
+                x = 0;
+            else
+                x = CP;
             File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
             UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}");
             settings.Write("Timer", (Time / 1000).ToString());
@@ -35,6 +38,7 @@ namespace SchoolWallpaperChanger.Functions
                 y = 0;
             File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
             UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}");
+            settings.Write("CurrentPicture", y.ToString());
             y++;
         }
 

@@ -24,7 +24,7 @@ namespace SchoolWallpaperChanger.Functions
                     bool? result = dialog.ShowDialog();
                     if (result == true)
                     {
-                        ChangeButton.FileLocation = dialog.FileName;
+                        ChangeButton.PicLocation = dialog.FileName;
                         window.Change.IsEnabled = true;
                         var btm = new BitmapImage();
                         btm.BeginInit();
@@ -47,6 +47,8 @@ namespace SchoolWallpaperChanger.Functions
                         }
                         else
                             window.Warning.Visibility = Visibility.Collapsed;
+                        File.Copy(ChangeButton.PicLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+                        File.Copy(ChangeButton.PicLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\0", true);
                     }
                     break;
                 case 1:
@@ -84,6 +86,7 @@ namespace SchoolWallpaperChanger.Functions
                             x++;
                         }
                         settings.Write("PictureCount", SlideShowS.PictureList.Count.ToString());
+                        settings.Write("CurrentPicture", "0");
                         Stopped = false;
                         window.Change.IsEnabled = true;
                         var btm = new BitmapImage();

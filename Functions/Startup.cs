@@ -18,6 +18,7 @@ namespace SchoolWallpaperChanger.Functions
         }
         public static void SetPicture()
         {
+            Selected = 2;
             var btm = new BitmapImage();
             btm.BeginInit();
             btm.DecodePixelHeight = 500;
@@ -25,7 +26,7 @@ namespace SchoolWallpaperChanger.Functions
             btm.CacheOption = BitmapCacheOption.OnLoad;
             btm.EndInit();
             window.Window2.Source = btm;
-            ChangeButton.FileLocation = $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0";
+            ChangeButton.PicLocation = $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0";
             window.Window2.Stretch = Stretch.Uniform;
 
             //Resolution Stuff
