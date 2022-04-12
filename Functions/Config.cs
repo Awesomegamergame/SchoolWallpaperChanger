@@ -40,7 +40,6 @@ namespace SchoolWallpaperChanger.Functions
     {
         public static void NewConfig()
         {
-            MainWindow.settings.Write("Startup", "false");
             MainWindow.settings.Write("Mode", "picture");
             MainWindow.settings.Write("SlideShow", "false");
             MainWindow.settings.Write("Timer", "5");

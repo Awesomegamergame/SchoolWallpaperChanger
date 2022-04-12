@@ -1,10 +1,10 @@
 ﻿using System;
-using System.IO;
 using System.Windows;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using SchoolWallpaperChanger.Functions;
 using SchoolWallpaperChanger.ButtonFunctions;
+using IWshRuntimeLibrary;
+using System.Reflection;
 
 namespace SchoolWallpaperChanger
 {
@@ -13,15 +13,15 @@ namespace SchoolWallpaperChanger
         public static MainWindow window;
         public static int Selected = 0;
         public static bool Stopped = false;
-        public NotifyIcon ni = new NotifyIcon();
+        public System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
         private readonly Regex _regex = new Regex("[^0-9]+");
-        public static IniFile settings = new IniFile("Settings.ini");
+        public static IniFile settings = new IniFile($"{AppDomain.CurrentDomain.BaseDirectory}\\Settings.ini");
         public MainWindow()
         {
             Updater.CheckInternetState();
             window = this;
             InitializeComponent();
-            if (!File.Exists("Settings.ini"))
+            if (!System.IO.File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\Settings.ini"))
                 Config.NewConfig();
             else
             {
@@ -121,5 +121,38 @@ namespace SchoolWallpaperChanger
             return !_regex.IsMatch(text);
         }
         #endregion
+
+        private void StartupB_Click(object sender, RoutedEventArgs e)
+        {
+            if (!System.IO.File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Start Menu\Programs\Startup\SchoolWallpaperChanger.lnk"))
+            {
+                MessageBox.Show("Startup Enabled");
+                StartupB.Content = " Startup \nEnabled";
+                CreateShortcut("SchoolWallpaperChanger", $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Start Menu\Programs\Startup\", Assembly.GetExecutingAssembly().Location);
+            }
+            else
+            {
+                MessageBox.Show("Statup Disabled");
+                StartupB.Content = " Startup \nDisabled";
+                System.IO.File.Delete($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Start Menu\Programs\Startup\SchoolWallpaperChanger.lnk");
+            }
+        }
+
+        private void StartupB_Initialized(object sender, EventArgs e)
+        {
+            if (!System.IO.File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Start Menu\Programs\Startup\SchoolWallpaperChanger.lnk"))
+                StartupB.Content = " Startup \nDisabled";
+            else
+                StartupB.Content = " Startup \nEnabled";
+        }
+        public static void CreateShortcut(string shortcutName, string shortcutPath, string targetFileLocation)
+        {
+            string shortcutLocation = System.IO.Path.Combine(shortcutPath, shortcutName + ".lnk");
+            WshShell shell = new WshShell();
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
+            shortcut.Arguments = "Startup";
+            shortcut.TargetPath = targetFileLocation;
+            shortcut.Save();
+        }
     }
 }
