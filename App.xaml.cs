@@ -19,11 +19,8 @@ namespace SchoolWallpaperChanger
         static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            #region Disable IntelliSense Here
-            #pragma warning disable IDE0059 // Unnecessary assignment of a value
+            string[] args = Environment.GetCommandLineArgs();
             var mutex = new Mutex(true, "SchoolWallpaperChanger", out bool aIsNewInstance);
-            #pragma warning restore IDE0059 // Unnecessary assignment of a value
-            #endregion
             if (!aIsNewInstance)
             {
                 Process current = Process.GetCurrentProcess();
@@ -40,6 +37,8 @@ namespace SchoolWallpaperChanger
             }
             else
             {
+                MessageBox.Show(args[0]);
+                MessageBox.Show(args[1]);
                 MainWindow window = new MainWindow();
                 window.Show();
             }
