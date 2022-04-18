@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolWallpaperChanger.Functions;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -37,10 +38,19 @@ namespace SchoolWallpaperChanger
             }
             else
             {
-                MessageBox.Show(args[0]);
-                MessageBox.Show(args[1]);
-                MainWindow window = new MainWindow();
-                window.Show();
+                if (args.Length == 2)
+                {
+                    MessageBox.Show(args[0]);
+                    MessageBox.Show(args[1]);
+                    MainWindow window = new MainWindow();
+                    window.Show();
+                    //ChangeButton.Change(MainWindow)
+                }
+                else
+                {
+                    MainWindow window = new MainWindow();
+                    window.Show();
+                }
             }
         }
     }
