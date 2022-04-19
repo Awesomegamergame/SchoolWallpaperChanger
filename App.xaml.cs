@@ -46,7 +46,7 @@ namespace SchoolWallpaperChanger
                 else
                 {
                     MainWindow window = new MainWindow();
-                    Functions.Startup.StartupM();
+                    window.Show();
                 }
             }
         }
