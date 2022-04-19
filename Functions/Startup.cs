@@ -68,13 +68,15 @@ namespace SchoolWallpaperChanger.Functions
         #endregion
         public static void StartupM()
         {
-            startup = 1;
             if (settings.KeyExists("Mode"))
             {
                 if (settings.Read("Mode").Equals("slideshow"))
                     Selected = 1;
-                else 
+                else
+                {
                     Selected = 2;
+                    startup = 1;
+                }
             }
             window.WindowState = WindowState.Minimized;
             ni.Visible = true;

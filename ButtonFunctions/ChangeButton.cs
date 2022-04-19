@@ -24,6 +24,8 @@ namespace SchoolWallpaperChanger.Functions
                         MessageBox.Show("Time cant be empty");
                         break;
                     }
+                    if (FileLocation == null)
+                        break;
                     int time = int.Parse(window.Time.Text);
                     if(time < 5)
                     {
