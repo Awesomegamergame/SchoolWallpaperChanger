@@ -9,7 +9,7 @@ A .NET Framework 4.8, C# and WPF app which enables you to change the wallpaper o
 
 Adds a Slideshow or Static Wallpaper image to your computer's background:
 
-![DemoImage](.github/ReadMeResources/DemoImage.png)
+![DemoImage](.github/ReadMeResources/DemoImage.jpg)
 
 
 ## How to Contribute 🐱
