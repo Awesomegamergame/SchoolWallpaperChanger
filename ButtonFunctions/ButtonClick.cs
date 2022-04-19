@@ -34,7 +34,10 @@ namespace SchoolWallpaperChanger.ButtonFunctions
         }
         public static void Picture()
         {
-            Selected = 0;
+            if (File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0"))
+                Selected = 2;
+            else
+                Selected = 0;
             window.Change.Content = "Change";
             window.Select.Content = "Select";
             window.Picture.IsEnabled = false;

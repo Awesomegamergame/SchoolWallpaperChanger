@@ -40,9 +40,14 @@ namespace SchoolWallpaperChanger.Functions
                     SL.SlideShow(time, CP);
                     break;
                 case 2:
-                    File.Copy(PicLocation, $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+                    if (!File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0"))
+                        break;
+                    File.Copy(PicLocation, $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
                     UIFunctions.SetWallpaper(FileLocation);
-                    MessageBox.Show("Wallpaper Reapplied");
+                    if (Startup.startup != 1)
+                        MessageBox.Show("Wallpaper Reapplied");
+                    else
+                        Startup.startup = 0;
                     break;
             }
         }

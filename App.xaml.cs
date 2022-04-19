@@ -40,11 +40,8 @@ namespace SchoolWallpaperChanger
             {
                 if (args.Length == 2)
                 {
-                    MessageBox.Show(args[0]);
-                    MessageBox.Show(args[1]);
                     MainWindow window = new MainWindow();
-                    window.Show();
-                    //ChangeButton.Change(MainWindow)
+                    Functions.Startup.StartupM();
                 }
                 else
                 {

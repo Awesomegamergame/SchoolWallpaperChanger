@@ -24,6 +24,8 @@ namespace SchoolWallpaperChanger.Functions
                 x = 0;
             else
                 x = CP;
+            if (!Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
+                return;
             File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
             UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}");
             settings.Write("Timer", (Time / 1000).ToString());

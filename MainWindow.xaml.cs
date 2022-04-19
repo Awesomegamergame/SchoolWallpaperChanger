@@ -13,7 +13,7 @@ namespace SchoolWallpaperChanger
         public static MainWindow window;
         public static int Selected = 0;
         public static bool Stopped = false;
-        public System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+        public static System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
         private readonly Regex _regex = new Regex("[^0-9]+");
         public static IniFile settings = new IniFile($"{AppDomain.CurrentDomain.BaseDirectory}\\Settings.ini");
         public MainWindow()
