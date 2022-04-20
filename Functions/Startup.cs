@@ -20,7 +20,6 @@ namespace SchoolWallpaperChanger.Functions
         #region Setup preview and locations
         public static void SetPicture()
         {
-            Selected = 2;
             var btm = new BitmapImage();
             btm.BeginInit();
             btm.DecodePixelHeight = 500;
@@ -30,17 +29,6 @@ namespace SchoolWallpaperChanger.Functions
             window.Window2.Source = btm;
             ChangeButton.PicLocation = $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0";
             window.Window2.Stretch = Stretch.Uniform;
-
-            //Resolution Stuff
-            var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0");
-            var size = UIFunctions.GetDisplayResolution();
-            if (img.Width != size.Width || img.Height != size.Height)
-            {
-                window.Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
-                window.Warning.Visibility = Visibility.Visible;
-            }
-            else
-                window.Warning.Visibility = Visibility.Collapsed;
         }
         public static void SetSlideShow()
         {
@@ -53,17 +41,6 @@ namespace SchoolWallpaperChanger.Functions
             window.Window3.Source = btm;
             ChangeButton.FileLocation = $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0";
             window.Window3.Stretch = Stretch.Uniform;
-
-            //Resolution Stuff
-            var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0");
-            var size = UIFunctions.GetDisplayResolution();
-            if (img.Width != size.Width || img.Height != size.Height)
-            {
-                window.Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
-                window.Warning.Visibility = Visibility.Visible;
-            }
-            else
-                window.Warning.Visibility = Visibility.Collapsed;
         }
         #endregion
         public static void StartupM()

@@ -9,6 +9,16 @@ namespace SchoolWallpaperChanger.ButtonFunctions
     {
         public static void SlideShow()
         {
+            window.Warning.Visibility = Visibility.Collapsed;
+            //Resolution Stuff
+            var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0");
+            var size = UIFunctions.GetDisplayResolution();
+            if (img.Width != size.Width || img.Height != size.Height)
+            {
+                window.Warning.Content = $"Warning All Pictures Should Be {size.Width}x{size.Height}";
+                window.Warning.Visibility = Visibility.Visible;
+            }
+            img.Dispose();
             Selected = 1;
             window.Change.Content = "Start";
             window.Select.Content = "Select Images";
@@ -24,7 +34,6 @@ namespace SchoolWallpaperChanger.ButtonFunctions
                 window.NoWallpaper.Content = "No Images Selected";
                 window.Change.IsEnabled = false;
             }
-            window.Warning.Visibility = Visibility.Collapsed;
             window.NoWallpaper.Visibility = Visibility.Visible;
             window.Window3.Visibility = Visibility.Visible;
             window.Window2.Visibility = Visibility.Collapsed;
@@ -34,6 +43,15 @@ namespace SchoolWallpaperChanger.ButtonFunctions
         }
         public static void Picture()
         {
+            window.Warning.Visibility = Visibility.Collapsed;
+            var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0");
+            var size = UIFunctions.GetDisplayResolution();
+            if (img.Width != size.Width || img.Height != size.Height)
+            {
+                window.Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
+                window.Warning.Visibility = Visibility.Visible;
+            }
+            img.Dispose();
             if (File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0"))
                 Selected = 2;
             else
@@ -52,7 +70,6 @@ namespace SchoolWallpaperChanger.ButtonFunctions
                 window.Change.IsEnabled = false;
             }
             window.SlideShow.IsEnabled = true;
-            window.Warning.Visibility = Visibility.Collapsed;
             window.NoWallpaper.Visibility = Visibility.Visible;
             window.Window3.Visibility = Visibility.Collapsed;
             window.Window2.Visibility= Visibility.Visible;
