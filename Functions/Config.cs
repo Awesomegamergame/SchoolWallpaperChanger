@@ -41,7 +41,6 @@ namespace SchoolWallpaperChanger.Functions
         public static void NewConfig()
         {
             MainWindow.settings.Write("Mode", "picture");
-            MainWindow.settings.Write("SlideShow", "false");
             MainWindow.settings.Write("Timer", "5");
             if (Directory.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
             {
