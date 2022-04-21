@@ -10,15 +10,6 @@ namespace SchoolWallpaperChanger.ButtonFunctions
         public static void SlideShow()
         {
             window.Warning.Visibility = Visibility.Collapsed;
-            //Resolution Stuff
-            var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0");
-            var size = UIFunctions.GetDisplayResolution();
-            if (img.Width != size.Width || img.Height != size.Height)
-            {
-                window.Warning.Content = $"Warning All Pictures Should Be {size.Width}x{size.Height}";
-                window.Warning.Visibility = Visibility.Visible;
-            }
-            img.Dispose();
             Selected = 1;
             window.Change.Content = "Start";
             window.Select.Content = "Select Images";
@@ -26,6 +17,14 @@ namespace SchoolWallpaperChanger.ButtonFunctions
             window.SlideShow.IsEnabled = false;
             if (File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0"))
             {
+                var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\SlideShow\0");
+                var size = UIFunctions.GetDisplayResolution();
+                if (img.Width != size.Width || img.Height != size.Height)
+                {
+                    window.Warning.Content = $"Warning All Pictures Should Be {size.Width}x{size.Height}";
+                    window.Warning.Visibility = Visibility.Visible;
+                }
+                img.Dispose();
                 window.NoWallpaper.Content = "";
                 window.Change.IsEnabled = true;
             }
@@ -44,16 +43,18 @@ namespace SchoolWallpaperChanger.ButtonFunctions
         public static void Picture()
         {
             window.Warning.Visibility = Visibility.Collapsed;
-            var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0");
-            var size = UIFunctions.GetDisplayResolution();
-            if (img.Width != size.Width || img.Height != size.Height)
-            {
-                window.Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
-                window.Warning.Visibility = Visibility.Visible;
-            }
-            img.Dispose();
             if (File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0"))
+            {
+                var img = System.Drawing.Image.FromFile($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0");
+                var size = UIFunctions.GetDisplayResolution();
+                if (img.Width != size.Width || img.Height != size.Height)
+                {
+                    window.Warning.Content = $"Warning Picture Should Be {size.Width}x{size.Height}";
+                    window.Warning.Visibility = Visibility.Visible;
+                }
+                img.Dispose();
                 Selected = 2;
+            }
             else
                 Selected = 0;
             window.Change.Content = "Change";
