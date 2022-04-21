@@ -1,5 +1,5 @@
 #define MyAppName "SchoolWallpaperChanger"
-#define MyAppVersion "1.1.0"
+#define MyAppVersion "1.2.0"
 #define MyAppPublisher "AGG-Productions"
 #define MyAppExeName "SchoolWallpaperChanger.exe"
 
