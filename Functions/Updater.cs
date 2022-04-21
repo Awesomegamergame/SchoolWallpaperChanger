@@ -20,6 +20,22 @@ namespace SchoolWallpaperChanger.Functions
         public static int VersionDetector = 0;
         public static Version onlineVersion;
         public static Version localVersion;
+        public static bool IsOnline;
+        public static void CheckInternetState()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (var stream = client.OpenRead("https://www.google.com"))
+                {
+                    IsOnline = true;
+                }
+            }
+            catch
+            {
+                IsOnline = false;
+            }
+        }
         public static void Update()
         {
             string exeOld = Path.Combine(rootPath, "SchoolWallpaperChanger.exe.old");
@@ -65,7 +81,7 @@ namespace SchoolWallpaperChanger.Functions
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error checking for game updates: {ex}");
+                MessageBox.Show($"Error checking for application updates: {ex}");
             }
         }
 
@@ -85,7 +101,7 @@ namespace SchoolWallpaperChanger.Functions
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error installing game files: {ex}");
+                MessageBox.Show($"Error installing application files: {ex}");
             }
         }
 

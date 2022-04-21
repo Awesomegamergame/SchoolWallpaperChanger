@@ -9,54 +9,52 @@ namespace SchoolWallpaperChanger.Functions
 {
     internal class SlideShowS
     {
-        public int x;
-        public int y;
-        public string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public int y = 1;
+        public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static Timer aTimer = new Timer();
-        public List<string> PictureNameList = new List<string>();
-        public List<string> PictureList = new List<string>();
-        public void SlideShow(List<string> PictureNameList, List<string> PictureList, int Time)
+        public static List<string> PictureList = new List<string>();
+        public void SlideShow(int Time, int CP)
         {
-
+            int x;
             window.Picture.IsEnabled = false;
             window.Stop.Visibility = Visibility.Visible;
             window.Change.Visibility = Visibility.Collapsed;
             window.Select.IsEnabled = false;
-            this.PictureNameList = PictureNameList;
-            this.PictureList = PictureList;
-            x = 0;
-            y = 0;
-            if (Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
-                DeleteDirectory($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow");
+            if (CP <= -1)
+                x = 0;
+            else
+                x = CP;
             if (!Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
-                Directory.CreateDirectory($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow");
-            foreach (string PictureLocation in PictureList)
-            {
-                File.Copy(PictureLocation, $@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{PictureNameList[x]}");
-                x++;
-            }
-            string Picture = PictureNameList[y];
-            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            y++;
-            RefreshUI.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
-            
+                return;
+            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}");
+            settings.Write("Timer", (Time / 1000).ToString());
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = Time;
             aTimer.Enabled = true;
         }
         public void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            if (y >= PictureNameList.Count)
+            if (y >= int.Parse(settings.Read("PictureCount")))
                 y = 0;
-            string Picture = PictureNameList[y];
-            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            RefreshUI.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{Picture}");
+            File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}");
+            settings.Write("CurrentPicture", y.ToString());
             y++;
         }
 
         public static void End()
         {
             aTimer.Close();
+            Stopped = true;
+            window.Time.IsEnabled = true;
+            window.Change.Visibility = Visibility.Visible;
+            window.Stop.Visibility = Visibility.Collapsed;
+            window.Select.Visibility = Visibility.Visible;
+            window.SlideShow.IsEnabled = false;
+            window.Picture.IsEnabled = true;
+            window.Change.IsEnabled = true;
+            window.Select.IsEnabled = true;
         }
 
         public static void DeleteDirectory(string target_dir)

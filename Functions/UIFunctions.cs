@@ -5,8 +5,14 @@ using System.Runtime.InteropServices;
 
 namespace SchoolWallpaperChanger.Functions
 {
-    internal class GetResolution
+    internal class UIFunctions
     {
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+        public static void SetWallpaper(string thePath)
+        {
+            SystemParametersInfo(20, 0, thePath, 4);
+        }
         [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
         public static extern int GetDeviceCaps(IntPtr hDC, int nIndex);
         public static double GetWindowsScreenScalingFactor(bool percentage = true)
@@ -24,7 +30,6 @@ namespace SchoolWallpaperChanger.Functions
             GraphicsObject.Dispose();
             return ScreenScalingFactor;
         }
-
         public static Size GetDisplayResolution()
         {
             var sf = GetWindowsScreenScalingFactor(false);

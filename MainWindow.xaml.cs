@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using SchoolWallpaperChanger.Functions;
+using SchoolWallpaperChanger.ButtonFunctions;
+using IWshRuntimeLibrary;
+using System.Reflection;
 
 namespace SchoolWallpaperChanger
 {
@@ -11,14 +13,23 @@ namespace SchoolWallpaperChanger
         public static MainWindow window;
         public static int Selected = 0;
         public static bool Stopped = false;
-        public NotifyIcon ni = new NotifyIcon();
+        public static System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
         private readonly Regex _regex = new Regex("[^0-9]+");
+        public static IniFile settings = new IniFile($"{AppDomain.CurrentDomain.BaseDirectory}\\Settings.ini");
         public MainWindow()
         {
-            CheckInternet.CheckInternetState();
+            Updater.CheckInternetState();
             window = this;
             InitializeComponent();
-            if (CheckInternet.IsOnline) { Updater.Update(); }
+            if (!System.IO.File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\Settings.ini"))
+                Config.NewConfig();
+            else
+            {
+                Config.ReadConfig();
+                Startup.Start();
+                GC.Collect();
+            }
+            if (Updater.IsOnline) { Updater.Update(); }
             #region Tray
             ni.Icon = Properties.Resources.icon;
             ni.Visible = false;
@@ -27,12 +38,19 @@ namespace SchoolWallpaperChanger
             {
                 Show();
                 WindowState = WindowState.Normal;
-                ni.Visible = true;
+                ni.Visible = false;
             };
             #endregion
         }
+        #region Tray
         protected override void OnStateChanged(EventArgs e)
         {
+            if(WindowState == WindowState.Normal)
+            {
+                window.Activate();
+                Show();
+                ni.Visible = false;
+            }
             if (WindowState == WindowState.Minimized)
             {
                 Hide();
@@ -40,13 +58,15 @@ namespace SchoolWallpaperChanger
             }
             base.OnStateChanged(e);
         }
+        #endregion
         private void Select_Click(object sender, RoutedEventArgs e)
-        {           
-            SelectButton.Select();
+        {
+            SelectButton.Select(Selected);
+            GC.Collect();
         }
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-            ChangeButton.Change();
+            ChangeButton.Change(Selected);
         }
         #region Updates
         private void No_Click(object sender, RoutedEventArgs e)
@@ -81,49 +101,17 @@ namespace SchoolWallpaperChanger
         #endregion
         private void SlideShow_Click(object sender, RoutedEventArgs e)
         {
-            Selected = 1;
-            Change.Content = "Start";
-            Select.Content = "Select Images";
-            Picture.IsEnabled = true;
-            SlideShow.IsEnabled = false;
-            Change.IsEnabled = false;
-            Warning.Visibility = Visibility.Collapsed;
-            NoWallpaper.Visibility = Visibility.Visible;
-            Window3.Visibility = Visibility.Visible;
-            NoWallpaper.Content = "No Images Selected";
-            TimeL.Visibility = Visibility.Visible;
-            Time.Visibility = Visibility.Visible;
+            ButtonClick.SlideShow();
         }
-
         private void Picture_Click(object sender, RoutedEventArgs e)
         {
-            Selected = 0;
-            Change.Content = "Change";
-            Select.Content = "Select";
-            Picture.IsEnabled = false;
-            SlideShow.IsEnabled = true;
-            Change.IsEnabled = false;
-            Warning.Visibility = Visibility.Collapsed;
-            NoWallpaper.Visibility = Visibility.Visible;
-            Window3.Visibility = Visibility.Visible;
-            TimeL.Visibility = Visibility.Collapsed;
-            Time.Visibility = Visibility.Collapsed;
-            NoWallpaper.Content = "No Wallpaper Selected";
+            ButtonClick.Picture();
         }
-
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
-            Stopped = true;
-            Time.IsEnabled = true;
-            Change.Visibility = Visibility.Visible;
-            Stop.Visibility = Visibility.Collapsed;
-            Select.Visibility = Visibility.Visible;
-            SlideShow.IsEnabled = false;
-            Picture.IsEnabled = true;
-            Change.IsEnabled = true;
-            Select.IsEnabled = true;
             SlideShowS.End();
         }
+        #region Timer Box
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             e.Handled = !IsTextAllowed(e.Text);
@@ -131,6 +119,40 @@ namespace SchoolWallpaperChanger
         private bool IsTextAllowed(string text)
         {
             return !_regex.IsMatch(text);
+        }
+        #endregion
+
+        private void StartupB_Click(object sender, RoutedEventArgs e)
+        {
+            if (!System.IO.File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Start Menu\Programs\Startup\SchoolWallpaperChanger.lnk"))
+            {
+                MessageBox.Show("Startup Enabled");
+                StartupB.Content = " Startup \nEnabled";
+                CreateShortcut("SchoolWallpaperChanger", $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Start Menu\Programs\Startup\", Assembly.GetExecutingAssembly().Location);
+            }
+            else
+            {
+                MessageBox.Show("Statup Disabled");
+                StartupB.Content = " Startup \nDisabled";
+                System.IO.File.Delete($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Start Menu\Programs\Startup\SchoolWallpaperChanger.lnk");
+            }
+        }
+
+        private void StartupB_Initialized(object sender, EventArgs e)
+        {
+            if (!System.IO.File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Start Menu\Programs\Startup\SchoolWallpaperChanger.lnk"))
+                StartupB.Content = " Startup \nDisabled";
+            else
+                StartupB.Content = " Startup \nEnabled";
+        }
+        public static void CreateShortcut(string shortcutName, string shortcutPath, string targetFileLocation)
+        {
+            string shortcutLocation = System.IO.Path.Combine(shortcutPath, shortcutName + ".lnk");
+            WshShell shell = new WshShell();
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
+            shortcut.Arguments = "Startup";
+            shortcut.TargetPath = targetFileLocation;
+            shortcut.Save();
         }
     }
 }
