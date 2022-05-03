@@ -47,6 +47,7 @@ namespace SchoolWallpaperChanger
         {
             if(WindowState == WindowState.Normal)
             {
+                window.ShowInTaskbar = true;
                 window.Activate();
                 Show();
                 ni.Visible = false;

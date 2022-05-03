@@ -55,7 +55,6 @@ namespace SchoolWallpaperChanger.Functions
                     startup = 1;
                 }
             }
-            window.WindowState = WindowState.Minimized;
             ni.Visible = true;
             ChangeButton.Change(Selected);
         }

@@ -38,6 +38,10 @@ namespace SchoolWallpaperChanger
                 if (args.Length == 2)
                 {
                     MainWindow window = new MainWindow();
+                    window.WindowState = WindowState.Minimized;
+                    window.ShowInTaskbar = false;
+                    window.Show();
+                    window.Hide();
                     Functions.Startup.StartupM();
                 }
                 else
