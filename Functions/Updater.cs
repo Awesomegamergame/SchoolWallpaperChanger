@@ -12,11 +12,11 @@ namespace SchoolWallpaperChanger.Functions
 {
     class Updater
     {
-        public static string rootPath = Directory.GetCurrentDirectory();
-        public static string LauncherLink = "https://raw.githubusercontent.com/awesomegamergame/SchoolWallpaperChanger/master/Webdata/SchoolWallpaperChanger%20Temp.zip";
-        public static string LauncherVerLink = "https://raw.githubusercontent.com/awesomegamergame/SchoolWallpaperChanger/master/Webdata/SchoolWallpaperChangerVersion.txt";
-        public static string startPath = @".\SchoolWallpaperChanger Temp";
-        public static string launcherZip = Path.Combine(rootPath, "SchoolWallpaperChanger Temp.zip");
+        public static string rootPath = AppDomain.CurrentDomain.BaseDirectory;
+        public static string AppLink = "https://raw.githubusercontent.com/awesomegamergame/SchoolWallpaperChanger/master/Webdata/SchoolWallpaperChanger%20Temp.zip";
+        public static string AppVerLink = "https://raw.githubusercontent.com/awesomegamergame/SchoolWallpaperChanger/master/Webdata/SchoolWallpaperChangerVersion.txt";
+        public static string startPath = $"{rootPath}\\SchoolWallpaperChanger Temp";
+        public static string AppZip = Path.Combine(rootPath, "SchoolWallpaperChanger Temp.zip");
         public static int VersionDetector = 0;
         public static Version onlineVersion;
         public static Version localVersion;
@@ -62,7 +62,7 @@ namespace SchoolWallpaperChanger.Functions
             try
             {
                 WebClient webClient = new WebClient();
-                onlineVersion = new Version(webClient.DownloadString(LauncherVerLink));
+                onlineVersion = new Version(webClient.DownloadString(AppVerLink));
                 if (onlineVersion.IsDifferentThan(localVersion))
                 {
                     VersionDetector += 1;
@@ -85,19 +85,19 @@ namespace SchoolWallpaperChanger.Functions
             }
         }
 
-        public static void InstallGameFiles(bool _isUpdate, Version _onlineVersion)
+        public static void InstallAppFiles(bool _isUpdate, Version _onlineVersion)
         {
             try
             {
-                FileDownloader LauncherDownload = new FileDownloader();
+                FileDownloader AppDownload = new FileDownloader();
                 WebClient webClient = new WebClient();
                 if (!_isUpdate)
                 {
-                    _onlineVersion = new Version(webClient.DownloadString(LauncherVerLink));
+                    _onlineVersion = new Version(webClient.DownloadString(AppVerLink));
                 }
-                LauncherDownload.DownloadFileAsync(LauncherLink, launcherZip, _onlineVersion);
-                LauncherDownload.DownloadProgressChanged += LauncherDownload_DownloadProgressChanged;
-                LauncherDownload.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadGameCompletedCallback);
+                AppDownload.DownloadFileAsync(AppLink, AppZip, _onlineVersion);
+                AppDownload.DownloadProgressChanged += AppDownload_DownloadProgressChanged;
+                AppDownload.DownloadFileCompleted += new AsyncCompletedEventHandler(AppGameCompletedCallback);
             }
             catch (Exception ex)
             {
@@ -105,12 +105,12 @@ namespace SchoolWallpaperChanger.Functions
             }
         }
 
-        private static void LauncherDownload_DownloadProgressChanged(object sender, FileDownloader.DownloadProgress progress)
+        private static void AppDownload_DownloadProgressChanged(object sender, FileDownloader.DownloadProgress progress)
         {
             window.UpdateProgress.Value = progress.ProgressPercentage;
         }
 
-        private static void DownloadGameCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        private static void AppGameCompletedCallback(object sender, AsyncCompletedEventArgs e)
         {
             string Exe = Path.Combine(rootPath, "SchoolWallpaperChanger.exe");
             string pdb = Path.Combine(rootPath, "SchoolWallpaperChanger.pdb");
@@ -121,18 +121,17 @@ namespace SchoolWallpaperChanger.Functions
                 {
                     if (File.Exists(Exe))
                     {
-                        File.Move(@".\SchoolWallpaperChanger.exe", @".\SchoolWallpaperChanger.exe.old");
+                        File.Move($"{rootPath}\\SchoolWallpaperChanger.exe", $"{rootPath}\\SchoolWallpaperChanger.exe.old");
                     }
                     if (File.Exists(pdb))
                     {
-                        File.Move(@".\SchoolWallpaperChanger.pdb", @".\SchoolWallpaperChanger.pdb.old");
+                        File.Move($"{rootPath}\\SchoolWallpaperChanger.pdb", $"{rootPath}\\SchoolWallpaperChanger.pdb.old");
                     }
                     try
                     {
                         //Declare a temporary path to unzip your files
-                        string tempPath = Path.Combine(Directory.GetCurrentDirectory(), "tempUnzip");
-                        string extractPath = Directory.GetCurrentDirectory();
-                        ZipFile.ExtractToDirectory(launcherZip, tempPath);
+                        string tempPath = Path.Combine(rootPath, "tempUnzip");
+                        ZipFile.ExtractToDirectory(AppZip, tempPath);
 
                         //build an array of the unzipped files
                         string[] files = Directory.GetFiles(tempPath);
@@ -141,14 +140,14 @@ namespace SchoolWallpaperChanger.Functions
                         {
                             FileInfo f = new FileInfo(file);
                             //Check if the file exists already, if so delete it and then move the new file to the extract folder
-                            if (File.Exists(Path.Combine(extractPath, f.Name)))
+                            if (File.Exists(Path.Combine(rootPath, f.Name)))
                             {
-                                File.Delete(Path.Combine(extractPath, f.Name));
-                                File.Move(f.FullName, Path.Combine(extractPath, f.Name));
+                                File.Delete(Path.Combine(rootPath, f.Name));
+                                File.Move(f.FullName, Path.Combine(rootPath, f.Name));
                             }
                             else
                             {
-                                File.Move(f.FullName, Path.Combine(extractPath, f.Name));
+                                File.Move(f.FullName, Path.Combine(rootPath, f.Name));
                             }
                         }
                         //Delete the temporary directory.
@@ -158,7 +157,7 @@ namespace SchoolWallpaperChanger.Functions
                     {
                         MessageBox.Show(ex.ToString());
                     }
-                    File.Delete(launcherZip);
+                    File.Delete(AppZip);
                     Process.Start(Exe);
                     Application.Current.Shutdown();
 
@@ -173,11 +172,11 @@ namespace SchoolWallpaperChanger.Functions
         {
             if(VersionDetector == 1)
             {
-                InstallGameFiles(true, onlineVersion);
+                InstallAppFiles(true, onlineVersion);
             }
             else if(VersionDetector == 2)
             {
-                InstallGameFiles(false, Version.zero);
+                InstallAppFiles(false, Version.zero);
             }
         }
     }
