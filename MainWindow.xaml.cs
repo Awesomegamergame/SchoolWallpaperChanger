@@ -29,7 +29,7 @@ namespace SchoolWallpaperChanger
                 Startup.Start();
                 GC.Collect();
             }
-            if (Updater.IsOnline) { Updater.Update(); }
+            //if (Updater.IsOnline) { Updater.Update(); }
             #region Tray
             ni.Icon = Properties.Resources.icon;
             ni.Visible = false;
