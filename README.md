@@ -2,7 +2,7 @@
 [![Release Build](https://github.com/awesomegamergame/SchoolWallpaperChanger/actions/workflows/ReleaseBuild.yml/badge.svg)](https://github.com/awesomegamergame/SchoolWallpaperChanger/releases)
 [![Debug Build](https://github.com/awesomegamergame/SchoolWallpaperChanger/actions/workflows/DebugBuild.yml/badge.svg)](https://github.com/awesomegamergame/SchoolWallpaperChanger/actions/workflows/DebugBuild.yml)
 
-A .NET Framework 4.8, C# and WPF app which enables you to change the wallpaper of computer's with restricted permissions (computer's managed by organizations such as schools or businesses). Latest stable Release is Version `1.2.2`.
+A .NET Framework 4.8, C# and WPF app which enables you to change the wallpaper of computer's with restricted permissions (computer's managed by organizations such as schools or businesses). Latest stable Release is Version `1.2.3`.
 
 
 ## Current Features 🛰
