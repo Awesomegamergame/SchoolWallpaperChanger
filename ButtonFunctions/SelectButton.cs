@@ -31,7 +31,7 @@ namespace SchoolWallpaperChanger.Functions
                         btm.UriSource = new Uri(dialog.FileName);
                         btm.DecodePixelHeight = 500;
                         btm.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                        btm.CacheOption = BitmapCacheOption.None;
+                        btm.CacheOption = BitmapCacheOption.OnLoad;
                         btm.EndInit();
                         window.Window2.Source = btm;
                         window.Window2.Stretch = Stretch.Uniform;
@@ -94,7 +94,7 @@ namespace SchoolWallpaperChanger.Functions
                         btm.UriSource = new Uri(dialogS.FileName);
                         btm.DecodePixelHeight = 500;
                         btm.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                        btm.CacheOption = BitmapCacheOption.None;
+                        btm.CacheOption = BitmapCacheOption.OnLoad;
                         btm.EndInit();
                         window.Window3.Source = btm;
                         window.Window3.Stretch = Stretch.Uniform;
