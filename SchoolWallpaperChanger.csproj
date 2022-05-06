@@ -88,6 +88,8 @@
     <Compile Include="ButtonFunctions\ButtonClick.cs" />
     <Compile Include="ButtonFunctions\ChangeButton.cs" />
     <Compile Include="External Functions\NativeMethods.cs" />
+    <Compile Include="External Functions\Program.cs" />
+    <Compile Include="External Functions\ScreenRes.cs" />
     <Compile Include="External Functions\Win32Wrapper.cs" />
     <Compile Include="Functions\Config.cs" />
     <Compile Include="Functions\FileDownloader.cs" />
