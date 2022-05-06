@@ -20,7 +20,7 @@ Submit a pull request following the PR template.
 
 ### Planned Features for Future Releases 🚀
 
-More features coming soon!
+More features like a more professional UI, Much cleaner code and hopefully alot more ways to have your wallpaper set EX: Video, Link, GIF, and more. Also a decrease in ram and resource usage and more coming soon.
 
 ### Issues ⛔
 If you experience any issues when running School Wallpaper Changer, report an Issue following the issues template.
