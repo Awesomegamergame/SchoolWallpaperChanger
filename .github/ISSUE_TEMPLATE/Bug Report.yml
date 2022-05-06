@@ -1,0 +1,59 @@
+name: Bug Report
+description: Report a bug or issue with the repository
+title: "[Bug]: "
+labels: ["bug", ""]
+assignees:
+  - awesomegamergame
+
+body:
+  - type: markdown
+    id: issuedetails
+    attributes:
+      value: "## Issue Details 🔥"
+  - type: textarea
+    id: explainissue
+    attributes:
+      label: Explain your issue
+      description: Please include what the experienced and expected behavior is. You may attach screenshots. *Be precise in your description and give as much detail as possible.*
+      placeholder: When starting up the computer, I would ordinarily expect...
+    validations:
+      required: true
+  - type: textarea
+    id: reproducesteps
+    attributes:
+      label: Steps to Reproduce
+      description: How you came across the issue and what exactly you did to make this bug happen. *Be precise in your description and give as much detail as possible.*
+      placeholder: When entering slideshow mode, the memory consumption...
+    validations:
+      required: true
+
+  - type: markdown
+    id: environmentdetails
+    attributes:
+      value: "## Environment Details "
+  - type: dropdown
+    id: version
+    attributes:
+      label: Software Version
+      description: What version of the program are you running? *If not running the bleeding edge build, please ensure you have updated to the latest [release](https://github.com/awesomegamergame/SchoolWallpaperChanger/releases) in case your problem has already been fixed.*
+      options:
+        - 1.2.3 (Latest)
+        - 1.3.0 (Bleeding Edge)
+    validations:
+      required: true
+  - type: checkboxes
+    id: isSchoolComputer
+    attributes:
+      label: School Computer
+      options:
+        - label: Check box if this is a school computer / computer with restricted permissions.
+          required: false
+  
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/awesomegamergame/SchoolWallpaperChanger/blob/master/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

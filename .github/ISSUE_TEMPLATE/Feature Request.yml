@@ -1,0 +1,24 @@
+name: Feature Request
+description: Request a new feature to be implemented.
+title: "[Bug]: "
+labels: ["enhancement", ""]
+assignees:
+  - awesomegamergame
+
+body:
+  - type: textarea
+    id: explainreason
+    attributes:
+      label: Explain your issue
+      description: What is the motivation / use case for changing the behavior? *Be precise in your description and give as much detail as possible.*
+      placeholder: Adding this feature to the program would enable several new usecases such as...
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this feature request, you agree to follow our [Code of Conduct](https://github.com/awesomegamergame/SchoolWallpaperChanger/blob/master/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
