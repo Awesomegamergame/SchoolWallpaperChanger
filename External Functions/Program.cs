@@ -99,7 +99,7 @@ namespace DrawBehindDesktopIcons
 
                 // Add a randomly moving button to the form
                 PictureBox pictureBox = new PictureBox();
-                pictureBox.Image = Image.FromFile("C:\\Users\\8x.cp\\Pictures\\pic.jpg");
+                pictureBox.Image = Image.FromFile($"{Environment.CurrentDirectory}\\pic.jpg");
                 pictureBox.Width = Screen.PrimaryScreen.Bounds.Width;
                 pictureBox.Height = Screen.PrimaryScreen.Bounds.Height;
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
