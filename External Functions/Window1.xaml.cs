@@ -35,11 +35,12 @@ namespace SchoolWallpaperChanger.External_Functions
         {
             Width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             Height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
-            WindowState = WindowState.Minimized;
-            WindowStartupLocation = WindowStartupLocation.Manual;
-            Left = -9;
-            Top = -8;
+            ShowInTaskbar = true;
+            ResizeMode = ResizeMode.NoResize;
+            WindowState = WindowState.Maximized;
             WindowStyle = WindowStyle.None;
+            Top = 0;
+            Left = 0;
         }
         private void img_Initialized(object sender, EventArgs e)
         {
