@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 using SchoolWallpaperChanger.External_Functions;
 
 namespace DrawBehindDesktopIcons
@@ -85,12 +86,13 @@ namespace DrawBehindDesktopIcons
                 return true;
             }), IntPtr.Zero);
             ScreenRes.SetDpiAwareness();
-            //Form form = new Form();
-            Thread thread = new Thread(FormThread.Thread);
-            thread.Start();
-            Thread.Sleep(10000);
-            FormThread.form1.pictureBox.Image = Image.FromFile($"{Environment.CurrentDirectory}\\pic2.jpg");
-            // Start the Application Loop for the Form.
+            Window1 window1 = new Window1();
+            window1.Show();
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri($@"{Environment.CurrentDirectory}\pic2.jpg");
+            bitmap.EndInit();
+            window1.image.Source = bitmap;
         }
         public static void RemoveWindowFromTaskbar(IntPtr handle)
         {
