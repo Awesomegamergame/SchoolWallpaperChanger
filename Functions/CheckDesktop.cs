@@ -18,14 +18,20 @@ namespace SchoolWallpaperChanger.Functions
             Thread.Sleep(5500);
             if (!Directory.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\CachedFiles\"))
             {
-                //Run the wpf program
+                Application.Current.Dispatcher.Invoke(delegate
+                {
+                    DrawBehindDesktopIcons.Program.Start(ChangeButton.PicLocation);
+                });
             }
             else
             {
                 string[] pictures = Directory.GetFiles($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\CachedFiles\");
                 if (pictures.Length == 0)
                 {
-                    //Run the wpf program
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        DrawBehindDesktopIcons.Program.Start(ChangeButton.PicLocation);
+                    });
                 }
                 foreach (string picture in pictures)
                 {
@@ -42,19 +48,20 @@ namespace SchoolWallpaperChanger.Functions
 
                     bool allBlack = true;
                     for (int index = 0; index < rgbValues.Length; index++)
+                    {
                         if (rgbValues[index] != 0)
                         {
                             allBlack = false;
                         }
+                    }
                     bmp.UnlockBits(bmpData);
                     bmp.Dispose();
                     if (allBlack)
                     {
-                        //Run the wpf program
-                    }
-                    else
-                    {
-                        MessageBox.Show("Not Black");
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            DrawBehindDesktopIcons.Program.Start(ChangeButton.PicLocation);
+                        });
                     }
                 }
             }

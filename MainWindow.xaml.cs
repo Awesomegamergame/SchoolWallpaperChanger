@@ -68,7 +68,6 @@ namespace SchoolWallpaperChanger
         private void Change_Click(object sender, RoutedEventArgs e)
         {
             ChangeButton.Change(Selected);
-            DrawBehindDesktopIcons.Program.Start();
         }
         #region Updates
         private void No_Click(object sender, RoutedEventArgs e)

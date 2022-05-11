@@ -22,7 +22,7 @@ namespace DrawBehindDesktopIcons
         [DllImport("User32.dll")]
         static extern int ReleaseDC(IntPtr hwnd, IntPtr dc);
         public static IntPtr workerw = IntPtr.Zero;
-        public static void Start()
+        public static void Start(string pictureLocation)
         {
             PrintVisibleWindowHandles(2);
             // The output will look something like this. 
@@ -90,7 +90,8 @@ namespace DrawBehindDesktopIcons
             window1.Show();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri($@"{Environment.CurrentDirectory}\pic2.jpg");
+            bitmap.UriSource = new Uri(pictureLocation);
+            bitmap.CacheOption = BitmapCacheOption.OnLoad;
             bitmap.EndInit();
             window1.image.Source = bitmap;
         }
