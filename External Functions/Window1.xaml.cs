@@ -37,7 +37,7 @@ namespace SchoolWallpaperChanger.External_Functions
             Height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
             ShowInTaskbar = true;
             ResizeMode = ResizeMode.NoResize;
-            WindowState = WindowState.Maximized;
+            WindowState = WindowState.Minimized;
             WindowStyle = WindowStyle.None;
             Top = 0;
             Left = 0;

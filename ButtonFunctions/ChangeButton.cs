@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using System.Threading;
 using static SchoolWallpaperChanger.MainWindow;
 
 namespace SchoolWallpaperChanger.Functions
@@ -15,6 +16,8 @@ namespace SchoolWallpaperChanger.Functions
             {
                 case 0:
                     UIFunctions.SetWallpaper(PicLocation);
+                    Thread thread = new Thread(CheckDesktop.Check);
+                    thread.Start();
                     MessageBox.Show("Wallpaper Changed");
                     MainWindow.Selected = 2;
                     break;
