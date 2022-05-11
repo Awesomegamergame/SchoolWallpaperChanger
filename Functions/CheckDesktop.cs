@@ -15,44 +15,47 @@ namespace SchoolWallpaperChanger.Functions
     {
         public static void Check()
         {
-            Thread.Sleep(6500);
+            Thread.Sleep(5500);
             if (!Directory.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\CachedFiles\"))
             {
                 //Run the wpf program
             }
-            string[] pictures = Directory.GetFiles($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\CachedFiles\");
-            if(pictures.Length == 0)
+            else
             {
-                //Run the wpf program
-            }
-            foreach (string picture in pictures)
-            {
-                Bitmap bmp = new Bitmap(picture);
-                Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
-
-                IntPtr ptr = bmpData.Scan0;
-
-                int bytes = bmpData.Stride * bmp.Height;
-                byte[] rgbValues = new byte[bytes];
-
-                Marshal.Copy(ptr, rgbValues, 0, bytes);
-
-                bool allBlack = true;
-                for (int index = 0; index < rgbValues.Length; index++)
-                    if (rgbValues[index] != 0)
-                    {
-                        allBlack = false;
-                    }
-                bmp.UnlockBits(bmpData);
-                bmp.Dispose();
-                if (allBlack)
+                string[] pictures = Directory.GetFiles($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\CachedFiles\");
+                if (pictures.Length == 0)
                 {
                     //Run the wpf program
                 }
-                else
+                foreach (string picture in pictures)
                 {
+                    Bitmap bmp = new Bitmap(picture);
+                    Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                    BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
 
+                    IntPtr ptr = bmpData.Scan0;
+
+                    int bytes = bmpData.Stride * bmp.Height;
+                    byte[] rgbValues = new byte[bytes];
+
+                    Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+                    bool allBlack = true;
+                    for (int index = 0; index < rgbValues.Length; index++)
+                        if (rgbValues[index] != 0)
+                        {
+                            allBlack = false;
+                        }
+                    bmp.UnlockBits(bmpData);
+                    bmp.Dispose();
+                    if (allBlack)
+                    {
+                        //Run the wpf program
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not Black");
+                    }
                 }
             }
         }
