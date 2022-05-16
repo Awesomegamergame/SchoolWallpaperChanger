@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
-namespace DrawBehindDesktopIcons
+namespace SchoolWallpaperChanger.ExternalFunctions
 {
     internal class ScreenRes
     {
@@ -28,8 +25,9 @@ namespace DrawBehindDesktopIcons
                     SetProcessDpiAwareness(ProcessDPIAwareness.ProcessPerMonitorDPIAware);
                 }
             }
-            catch (EntryPointNotFoundException)//this exception occures if OS does not implement this API, just ignore it.
+            catch (EntryPointNotFoundException ex)
             {
+                MessageBox.Show($"An unexpected error has happened ERROR:{ex}");
             }
         }
     }

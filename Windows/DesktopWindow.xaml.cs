@@ -1,25 +1,16 @@
-﻿using DrawBehindDesktopIcons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using SchoolWallpaperChanger.Functions;
+using SchoolWallpaperChanger.ExternalFunctions;
 
-namespace SchoolWallpaperChanger.External_Functions
+namespace SchoolWallpaperChanger.Windows
 {
-    public partial class Window1 : Window
+    public partial class DesktopWindow : Window
     {
         public Image image;
-        public Window1()
+        public DesktopWindow()
         {
             InitializeComponent();
             Start();
@@ -27,9 +18,8 @@ namespace SchoolWallpaperChanger.External_Functions
         }
         private void MyWindow_Loaded(object sender, RoutedEventArgs e) 
         {
-            Program.RemoveWindowFromTaskbar(new WindowInteropHelper(this).Handle);
-
-            W32.SetParent(new WindowInteropHelper(this).Handle, Program.workerw);
+            NativeMethods.RemoveWindowFromTaskbar(new WindowInteropHelper(this).Handle);
+            NativeMethods.SetParent(new WindowInteropHelper(this).Handle, WindowThread.workerw);
         }
         public void Start()
         {

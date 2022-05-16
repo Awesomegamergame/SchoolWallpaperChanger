@@ -1,8 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -20,7 +17,7 @@ namespace SchoolWallpaperChanger.Functions
             {
                 Application.Current.Dispatcher.Invoke(delegate
                 {
-                    DrawBehindDesktopIcons.Program.Start(ChangeButton.PicLocation);
+                    WindowThread.Start(ChangeButton.PicLocation);
                 });
             }
             else
@@ -30,7 +27,7 @@ namespace SchoolWallpaperChanger.Functions
                 {
                     Application.Current.Dispatcher.Invoke(delegate
                     {
-                        DrawBehindDesktopIcons.Program.Start(ChangeButton.PicLocation);
+                        WindowThread.Start(ChangeButton.PicLocation);
                     });
                 }
                 foreach (string picture in pictures)
@@ -60,7 +57,7 @@ namespace SchoolWallpaperChanger.Functions
                     {
                         Application.Current.Dispatcher.Invoke(delegate
                         {
-                            DrawBehindDesktopIcons.Program.Start(ChangeButton.PicLocation);
+                            WindowThread.Start(ChangeButton.PicLocation);
                         });
                     }
                 }

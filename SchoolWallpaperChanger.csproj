@@ -77,7 +77,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="External Functions\Window1.xaml">
+    <Page Include="Windows\DesktopWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,12 +91,11 @@
     </Compile>
     <Compile Include="ButtonFunctions\ButtonClick.cs" />
     <Compile Include="ButtonFunctions\ChangeButton.cs" />
-    <Compile Include="External Functions\NativeMethods.cs" />
-    <Compile Include="External Functions\Program.cs" />
-    <Compile Include="External Functions\ScreenRes.cs" />
-    <Compile Include="External Functions\Win32Wrapper.cs" />
-    <Compile Include="External Functions\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="ExternalFunctions\NativeMethods.cs" />
+    <Compile Include="Functions\WindowThread.cs" />
+    <Compile Include="ExternalFunctions\ScreenRes.cs" />
+    <Compile Include="Windows\DesktopWindow.xaml.cs">
+      <DependentUpon>DesktopWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Functions\CheckDesktop.cs" />
     <Compile Include="Functions\Config.cs" />
