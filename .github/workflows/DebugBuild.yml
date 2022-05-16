@@ -1,9 +1,9 @@
 name: Debug Build
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ dev ]
   pull_request:
-    branches: [ master, dev ]
+    branches: [ dev ]
 jobs:
   build:
     runs-on: windows-latest
