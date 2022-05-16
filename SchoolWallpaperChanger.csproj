@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.2.1.%2a</ApplicationVersion>
+    <ApplicationVersion>1.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -77,6 +77,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Windows\DesktopWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -87,6 +91,13 @@
     </Compile>
     <Compile Include="ButtonFunctions\ButtonClick.cs" />
     <Compile Include="ButtonFunctions\ChangeButton.cs" />
+    <Compile Include="ExternalFunctions\NativeMethods.cs" />
+    <Compile Include="Functions\WindowThread.cs" />
+    <Compile Include="ExternalFunctions\ScreenRes.cs" />
+    <Compile Include="Windows\DesktopWindow.xaml.cs">
+      <DependentUpon>DesktopWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\CheckDesktop.cs" />
     <Compile Include="Functions\Config.cs" />
     <Compile Include="Functions\FileDownloader.cs" />
     <Compile Include="Functions\Startup.cs" />
