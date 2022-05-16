@@ -12,11 +12,11 @@ namespace SchoolWallpaperChanger.Functions
         public static string PicLocation;
         public static void Change(int Selected)
         {
+            Thread thread = new Thread(CheckDesktop.Check);
             switch (Selected)
             {
                 case 0:
                     UIFunctions.SetWallpaper(PicLocation);
-                    Thread thread = new Thread(CheckDesktop.Check);
                     thread.Start();
                     MessageBox.Show("Wallpaper Changed");
                     MainWindow.Selected = 2;
@@ -49,6 +49,7 @@ namespace SchoolWallpaperChanger.Functions
                         break;
                     File.Copy(PicLocation, $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
                     UIFunctions.SetWallpaper(FileLocation);
+                    thread.Start();
                     if (Startup.startup != 1)
                         MessageBox.Show("Wallpaper Reapplied");
                     else
