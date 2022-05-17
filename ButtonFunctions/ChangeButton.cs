@@ -71,7 +71,6 @@ namespace SchoolWallpaperChanger.Functions
         {
             window.Change.IsEnabled = true;
             window.Select.IsEnabled = true;
-            window.Picture.IsEnabled = true;
             window.SlideShow.IsEnabled = true;
             window.SettingL.Visibility = Visibility.Collapsed;
         }
