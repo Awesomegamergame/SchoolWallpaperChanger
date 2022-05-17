@@ -24,7 +24,6 @@ namespace SchoolWallpaperChanger.Functions
                     DisableUI();
                     UIFunctions.SetWallpaper(PicLocation);
                     thread.Start();
-                    MessageBox.Show("Wallpaper Changed");
                     MainWindow.Selected = 2;
                     break;
                 case 1:
@@ -57,10 +56,6 @@ namespace SchoolWallpaperChanger.Functions
                     DisableUI();
                     UIFunctions.SetWallpaper(FileLocation);
                     thread.Start();
-                    if (Startup.startup != 1)
-                        MessageBox.Show("Wallpaper Reapplied");
-                    else
-                        Startup.startup = 0;
                     break;
             }
         }
@@ -70,6 +65,7 @@ namespace SchoolWallpaperChanger.Functions
             window.Select.IsEnabled = false;
             window.Picture.IsEnabled = false;
             window.SlideShow.IsEnabled = false;
+            window.SettingL.Visibility = Visibility.Visible;
         }
         public static void EnableUI()
         {
@@ -77,6 +73,7 @@ namespace SchoolWallpaperChanger.Functions
             window.Select.IsEnabled = true;
             window.Picture.IsEnabled = true;
             window.SlideShow.IsEnabled = true;
+            window.SettingL.Visibility = Visibility.Collapsed;
         }
     }
 }
