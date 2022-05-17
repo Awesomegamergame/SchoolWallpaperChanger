@@ -7,6 +7,7 @@ namespace SchoolWallpaperChanger.Functions
 {
     class WindowThread
     {
+        public static DesktopWindow window1;
         public static IntPtr workerw = IntPtr.Zero;
         public static void Start(string pictureLocation)
         {
@@ -24,7 +25,7 @@ namespace SchoolWallpaperChanger.Functions
                 return true;
             }), IntPtr.Zero);
             ScreenRes.SetDpiAwareness();
-            DesktopWindow window1 = new DesktopWindow();
+            window1 = new DesktopWindow();
             window1.Show();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
@@ -32,6 +33,8 @@ namespace SchoolWallpaperChanger.Functions
             bitmap.CacheOption = BitmapCacheOption.OnLoad;
             bitmap.EndInit();
             window1.image.Source = bitmap;
+            ChangeButton.stop = true;
+            ChangeButton.EnableUI();
         }
     }
 }

@@ -15,6 +15,8 @@ namespace SchoolWallpaperChanger.Functions
             Thread.Sleep(5500);
             if (!Directory.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\CachedFiles\"))
             {
+                if (Application.Current == null)
+                    return;
                 Application.Current.Dispatcher.Invoke(delegate
                 {
                     WindowThread.Start(ChangeButton.PicLocation);
@@ -60,6 +62,11 @@ namespace SchoolWallpaperChanger.Functions
                             WindowThread.Start(ChangeButton.PicLocation);
                         });
                     }
+                    else
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            ChangeButton.EnableUI();
+                        });
                 }
             }
         }

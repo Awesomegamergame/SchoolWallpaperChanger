@@ -10,12 +10,18 @@ namespace SchoolWallpaperChanger.Functions
     {
         public static string FileLocation;
         public static string PicLocation;
+        public static Thread thread;
+        public static bool stop = false;
         public static void Change(int Selected)
         {
-            Thread thread = new Thread(CheckDesktop.Check);
+            if(stop)
+                WindowThread.window1.Close();
+            GC.Collect();
+            thread = new Thread(CheckDesktop.Check);
             switch (Selected)
             {
                 case 0:
+                    DisableUI();
                     UIFunctions.SetWallpaper(PicLocation);
                     thread.Start();
                     MessageBox.Show("Wallpaper Changed");
@@ -48,6 +54,7 @@ namespace SchoolWallpaperChanger.Functions
                     if (!File.Exists($@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\0"))
                         break;
                     File.Copy(PicLocation, $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
+                    DisableUI();
                     UIFunctions.SetWallpaper(FileLocation);
                     thread.Start();
                     if (Startup.startup != 1)
@@ -56,6 +63,20 @@ namespace SchoolWallpaperChanger.Functions
                         Startup.startup = 0;
                     break;
             }
+        }
+        public static void DisableUI()
+        {
+            window.Change.IsEnabled = false;
+            window.Select.IsEnabled = false;
+            window.Picture.IsEnabled = false;
+            window.SlideShow.IsEnabled = false;
+        }
+        public static void EnableUI()
+        {
+            window.Change.IsEnabled = true;
+            window.Select.IsEnabled = true;
+            window.Picture.IsEnabled = true;
+            window.SlideShow.IsEnabled = true;
         }
     }
 }
