@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Timers;
 using System.Windows;
+using Windows.Native;
 using static SchoolWallpaperChanger.MainWindow;
 
 namespace SchoolWallpaperChanger.Functions
@@ -13,6 +14,7 @@ namespace SchoolWallpaperChanger.Functions
         public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static Timer aTimer = new Timer();
         public static List<string> PictureList = new List<string>();
+        IActiveDesktop iad = shlobj.GetActiveDesktop();
         public void SlideShow(int Time, int CP)
         {
             int x;
@@ -27,7 +29,8 @@ namespace SchoolWallpaperChanger.Functions
             if (!Directory.Exists($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow"))
                 return;
             File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}");
+            iad.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{x}", 0);
+            iad.ApplyChanges(AD_Apply.ALL | AD_Apply.FORCE | AD_Apply.BUFFERED_REFRESH);
             settings.Write("Timer", (Time / 1000).ToString());
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = Time;
@@ -38,7 +41,11 @@ namespace SchoolWallpaperChanger.Functions
             if (y >= int.Parse(settings.Read("PictureCount")))
                 y = 0;
             File.Copy($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}", $@"{AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
-            UIFunctions.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}");
+            Application.Current.Dispatcher.Invoke(delegate
+            {
+                iad.SetWallpaper($@"{AppDataPath}\Microsoft\Windows\Themes\SlideShow\{y}", 0);
+                iad.ApplyChanges(AD_Apply.ALL | AD_Apply.FORCE | AD_Apply.BUFFERED_REFRESH);
+            });
             settings.Write("CurrentPicture", y.ToString());
             y++;
         }

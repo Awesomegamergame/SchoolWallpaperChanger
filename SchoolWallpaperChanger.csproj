@@ -92,6 +92,7 @@
     <Compile Include="ButtonFunctions\ButtonClick.cs" />
     <Compile Include="ButtonFunctions\ChangeButton.cs" />
     <Compile Include="ExternalFunctions\NativeMethods.cs" />
+    <Compile Include="ExternalFunctions\shlobj.cs" />
     <Compile Include="Functions\WindowThread.cs" />
     <Compile Include="ExternalFunctions\ScreenRes.cs" />
     <Compile Include="Windows\DesktopWindow.xaml.cs">
