@@ -63,8 +63,6 @@ namespace SchoolWallpaperChanger
         private void Select_Click(object sender, RoutedEventArgs e)
         {
             SelectButton.Select(Selected);
-            int hi = 0;
-            int num = 1 / hi;
             GC.Collect();
         }
         private void Change_Click(object sender, RoutedEventArgs e)
