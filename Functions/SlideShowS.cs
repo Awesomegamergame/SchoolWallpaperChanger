@@ -79,7 +79,6 @@ namespace SchoolWallpaperChanger.Functions
             {
                 DeleteDirectory(dir);
             }
-
             Directory.Delete(target_dir, false);
         }
     }
