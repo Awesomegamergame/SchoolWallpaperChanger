@@ -5,6 +5,8 @@ using SchoolWallpaperChanger.Functions;
 using SchoolWallpaperChanger.ButtonFunctions;
 using IWshRuntimeLibrary;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace SchoolWallpaperChanger
 {
@@ -154,6 +156,40 @@ namespace SchoolWallpaperChanger
             shortcut.Arguments = "Startup";
             shortcut.TargetPath = targetFileLocation;
             shortcut.Save();
+        }
+        [DllImport("DpiHelper.dll")]
+        static public extern void PrintDpiInfo();
+
+        [DllImport("DpiHelper.dll")]
+        static public extern int SetDPIScaling(Int32 adapterIDHigh, UInt32 adapterIDlow, UInt32 sourceID, UInt32 dpiPercentToSet);
+        [DllImport("DpiHelper.dll")]
+        static public extern void RestoreDPIScaling();
+
+        private void Scale_Initialized(object sender, EventArgs e)
+        {
+            PrintDpiInfo();
+            string Scales = GetLine("DPI.txt", 4);
+            string[] Split = Scales.Split(' ');
+            int s = Split.Length - 1;
+            for (int x = 0; x < s; x++)
+            {
+                Scale.Items.Add(Split[x]);
+            }
+        }
+        string GetLine(string fileName, int line)
+        {
+            using (var sr = new StreamReader(fileName))
+            {
+                for (int i = 1; i < line; i++)
+                    sr.ReadLine();
+                return sr.ReadLine();
+            }
+        }
+
+        private void ScaleLRec_Initialized(object sender, EventArgs e)
+        {
+            string rec = GetLine("DPI.txt", 3);
+            ScaleLRec.Content = $"Recommended: {rec}%";
         }
     }
 }
