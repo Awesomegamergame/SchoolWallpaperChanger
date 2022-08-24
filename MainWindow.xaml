@@ -27,7 +27,7 @@
         <Button x:Name="SlideShow" Content="Slide Show" Click="SlideShow_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" Margin="80,0,0,0"/>
         <Button x:Name="StartupB" Click="StartupB_Click" HorizontalAlignment="Right" Initialized="StartupB_Initialized" VerticalAlignment="Top" Height="40" Width="80" Margin="80,0,0,0"/>
         <Label x:Name="SettingL" Content="Setting wallpaper please wait" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,0,0,85" Grid.Row="1" FontSize="20" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="Scale" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Row="1" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Width="158" Height="34" Initialized="Scale_Initialized"/>
+        <ComboBox x:Name="Scale" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Row="1" SelectionChanged="Scale_SelectionChanged" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Width="158" Height="34" Initialized="Scale_Initialized"/>
         <Label x:Name="ScaleL" Visibility="Visible" Content="Windows Scale" HorizontalAlignment="Center" Margin="0,0,0,55" Grid.Row="1" FontSize="16" VerticalAlignment="Bottom"/>
         <Label x:Name="ScaleLRec" Visibility="Visible" Content="Recommended: 100%" HorizontalAlignment="Center" Margin="0,0,0,38" Grid.Row="1" Initialized="ScaleLRec_Initialized" FontSize="16" VerticalAlignment="Bottom"/>
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using SchoolWallpaperChanger.Functions;
 using SchoolWallpaperChanger.ButtonFunctions;
@@ -18,6 +19,7 @@ namespace SchoolWallpaperChanger
         public static System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
         private readonly Regex _regex = new Regex("[^0-9]+");
         public static IniFile settings = new IniFile($"{AppDomain.CurrentDomain.BaseDirectory}\\Settings.ini");
+        private bool ignoreFirst = true;
         public MainWindow()
         {
             Updater.CheckInternetState();
@@ -157,6 +159,12 @@ namespace SchoolWallpaperChanger
             shortcut.TargetPath = targetFileLocation;
             shortcut.Save();
         }
+
+        //TODO: We should do all of this dll loading after the window gets initialized
+        //      so we get a better crash log instead of the app failing to start error
+        //
+        //      But for now we will put it here for testing but change it later before release
+
         [DllImport("DpiHelper.dll")]
         static public extern void PrintDpiInfo();
 
@@ -168,12 +176,15 @@ namespace SchoolWallpaperChanger
         private void Scale_Initialized(object sender, EventArgs e)
         {
             PrintDpiInfo();
-            string Scales = GetLine("DPI.txt", 4);
+            string Scales = GetLine("DPI.txt", 5);
+            string currentScale = GetLine("DPI.txt", 3);
             string[] Split = Scales.Split(' ');
             int s = Split.Length - 1;
             for (int x = 0; x < s; x++)
             {
                 Scale.Items.Add(Split[x]);
+                if (currentScale.Equals(Split[x]))
+                    Scale.SelectedIndex = x;
             }
         }
         string GetLine(string fileName, int line)
@@ -188,8 +199,25 @@ namespace SchoolWallpaperChanger
 
         private void ScaleLRec_Initialized(object sender, EventArgs e)
         {
-            string rec = GetLine("DPI.txt", 3);
+            string rec = GetLine("DPI.txt", 4);
             ScaleLRec.Content = $"Recommended: {rec}%";
+        }
+
+        private void Scale_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ignoreFirst)
+                ignoreFirst = false;
+            else
+            {
+                string adaptorID = GetLine("DPI.txt", 1);
+                string[] Split = adaptorID.Split('.');
+                uint sourceID = uint.Parse(GetLine("DPI.txt", 2));
+                int adapterIDHigh = int.Parse(Split[0]);
+                uint adapterIDLow = uint.Parse(Split[1]);
+                uint scalePercent = uint.Parse(Scale.SelectedItem.ToString());
+                SetDPIScaling(adapterIDHigh, adapterIDLow, sourceID, scalePercent);
+                MessageBox.Show("It is Recommended to log out and back in to fully apply the scale to all apps.");
+            }
         }
     }
 }

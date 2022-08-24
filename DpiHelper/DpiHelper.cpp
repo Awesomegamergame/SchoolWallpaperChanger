@@ -253,7 +253,7 @@ void PrintDpiInfo()
         myfile.open("DPI.txt");
         GpuId[i] = adapterLUID;
         myfile << adapterLUID.HighPart << '.';
-        myfile << adapterLUID.LowPart << ' ';
+        myfile << adapterLUID.LowPart << '\n';
         DesktopIndexInGpu[i] = sourceID;
         myfile << sourceID << '\n';
         myfile << dpiInfo.current << '\n';
