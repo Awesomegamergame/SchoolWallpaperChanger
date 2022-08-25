@@ -160,6 +160,8 @@ namespace SchoolWallpaperChanger
             shortcut.Save();
         }
 
+        #region Windows Scale
+
         [DllImport("DpiHelper.dll")]
         static public extern void PrintDpiInfo();
 
@@ -197,19 +199,30 @@ namespace SchoolWallpaperChanger
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            PrintDpiInfo();
-            string Scales = GetLine("DPI.txt", 5);
-            string currentScale = GetLine("DPI.txt", 3);
-            string[] Split = Scales.Split(' ');
-            int s = Split.Length - 1;
-            for (int x = 0; x < s; x++)
+            if (System.IO.File.Exists("DPI.txt"))
             {
-                Scale.Items.Add(Split[x]);
-                if (currentScale.Equals(Split[x]))
-                    Scale.SelectedIndex = x;
+                PrintDpiInfo();
+                string Scales = GetLine("DPI.txt", 5);
+                string currentScale = GetLine("DPI.txt", 3);
+                string[] Split = Scales.Split(' ');
+                int s = Split.Length - 1;
+                for (int x = 0; x < s; x++)
+                {
+                    Scale.Items.Add(Split[x]);
+                    if (currentScale.Equals(Split[x]))
+                        Scale.SelectedIndex = x;
+                }
+                string rec = GetLine("DPI.txt", 4);
+                ScaleLRec.Content = $"Recommended: {rec}%";
             }
-            string rec = GetLine("DPI.txt", 4);
-            ScaleLRec.Content = $"Recommended: {rec}%";
+            else
+            {
+                ScaleLRec.Visibility = Visibility.Collapsed;
+                ScaleL.Visibility = Visibility.Collapsed;
+                Scale.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Warning something is wrong with DpiHelper's api please report this error");
+            }
         }
+        #endregion
     }
 }
