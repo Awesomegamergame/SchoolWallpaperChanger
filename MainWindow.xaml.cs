@@ -199,9 +199,9 @@ namespace SchoolWallpaperChanger
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            PrintDpiInfo();
             if (System.IO.File.Exists("DPI.txt"))
             {
-                PrintDpiInfo();
                 string Scales = GetLine("DPI.txt", 5);
                 string currentScale = GetLine("DPI.txt", 3);
                 string[] Split = Scales.Split(' ');
