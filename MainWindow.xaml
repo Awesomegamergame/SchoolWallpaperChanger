@@ -8,7 +8,8 @@
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         Title="SchoolWallpaperChanger" Height="510" Width="874"
-        MinHeight="510" MinWidth="874">
+        MinHeight="510" MinWidth="874"
+        Loaded="Window_Loaded">
     <Grid Background="#FF7F7F7F">
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
@@ -17,8 +18,8 @@
         <Button x:Name="Select" Content="Select" HorizontalAlignment="Left" Visibility="Visible" FontSize="16" Margin="73,0,0,69" Click="Select_Click" Width="177" Grid.Row="1" Height="60" VerticalAlignment="Bottom"/>
         <Button x:Name="Change" Content="Change" Visibility="Visible" FontSize="16" Margin="0,0,73,69" IsEnabled="False" Click="Change_Click" Grid.Row="1" HorizontalAlignment="Right" Width="177" Height="60" VerticalAlignment="Bottom"/>
         <Button x:Name="Stop" Content="Stop" Visibility="Collapsed" FontSize="16" Margin="0,0,73,69" IsEnabled="True" Click="Stop_Click" Grid.Row="1" HorizontalAlignment="Right" Width="177" Height="60" VerticalAlignment="Bottom"/>
-        <Label x:Name="TimeL" Content="Switch Timer (Seconds) Min is 5" Grid.Row="1" Visibility="Collapsed" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="Time" HorizontalAlignment="Center" Visibility="Collapsed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" VerticalAlignment="Bottom" PreviewTextInput="TextBox_PreviewTextInput" Margin="0,0,0,69" Grid.Row="1" TextWrapping="Wrap" Width="178" Height="30"/>
+        <Label x:Name="TimeL" Content="Switch Timer (Seconds) Min is 5" Grid.Row="1" Visibility="Collapsed" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,124" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="Time" HorizontalAlignment="Center" Visibility="Collapsed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" VerticalAlignment="Bottom" PreviewTextInput="TextBox_PreviewTextInput" Margin="0,0,0,95" Grid.Row="1" TextWrapping="Wrap" Width="178" Height="30"/>
         <Image x:Name="Window2" Source="Images/background2.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="74,50,74,160" Grid.RowSpan="2"/>
         <Image x:Name="Window3" Source="Images/background2.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" Width="Auto" Margin="74,50,74,160" Grid.RowSpan="2"/>
         <Label x:Name="NoWallpaper" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="270,37,270,279" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="60" FontSize="30" Grid.Row="1"/>
@@ -27,6 +28,10 @@
         <Button x:Name="SlideShow" Content="Slide Show" Click="SlideShow_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" Margin="80,0,0,0"/>
         <Button x:Name="StartupB" Click="StartupB_Click" HorizontalAlignment="Right" Initialized="StartupB_Initialized" VerticalAlignment="Top" Height="40" Width="80" Margin="80,0,0,0"/>
         <Label x:Name="SettingL" Content="Setting wallpaper please wait" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,0,0,85" Grid.Row="1" FontSize="20" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="Scale" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Row="1" SelectionChanged="Scale_SelectionChanged" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Width="158" Height="34"/>
+        <Label x:Name="ScaleL" Visibility="Visible" Content="Windows Scale" HorizontalAlignment="Center" Margin="0,0,0,55" Grid.Row="1" FontSize="16" VerticalAlignment="Bottom"/>
+        <Label x:Name="ScaleLRec" Visibility="Visible" Content="Recommended: 100%" HorizontalAlignment="Center" Margin="0,0,0,38" Grid.Row="1" FontSize="16" VerticalAlignment="Bottom"/>
+
 
         <Image x:Name="UpdateScreen" Source="Images/Background.jpg" Visibility="Collapsed" Margin="0,0,0.333,-13.333" Grid.RowSpan="2" Stretch="Fill"/>
         <Label x:Name="UpdateText1" Visibility="Collapsed" Content="App Update Available" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="280,25,253,0" FontSize="25" Height="44" Width="313" Grid.Row="1"/>

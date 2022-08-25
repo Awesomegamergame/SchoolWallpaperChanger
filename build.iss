@@ -1,5 +1,5 @@
 #define MyAppName "SchoolWallpaperChanger"
-#define MyAppVersion "1.3.1"
+#define MyAppVersion "1.4.0"
 #define MyAppPublisher "AGG-Productions"
 #define MyAppExeName "SchoolWallpaperChanger.exe"
 
@@ -27,10 +27,11 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: checkedonce
 
 [Files]
-Source: ".\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\bin\Release\SchoolWallpaperChanger.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\bin\Release\SchoolWallpaperChanger.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\bin\Release\SchoolWallpaperChanger.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\bin\x64\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\bin\x64\Release\SchoolWallpaperChanger.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\bin\x64\Release\SchoolWallpaperChanger.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\bin\x64\Release\SchoolWallpaperChanger.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\bin\x64\Release\DpiHelper.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

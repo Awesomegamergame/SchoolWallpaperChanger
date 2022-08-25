@@ -13,7 +13,7 @@ jobs:
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.0.2
     - name: Build Project
-      run: msbuild SchoolWallpaperChanger.csproj /t:Build /p:Configuration=Debug
+      run: msbuild SchoolWallpaperChanger.sln /t:Build /p:Configuration=Debug
     - name: Resolve Short Commit Hash
       if: startsWith(github.ref, 'refs/tags/') == false
       id: get_hash
@@ -24,4 +24,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: SchoolWallpaperChanger-${{ steps.get_hash.outputs.hash }}
-        path: ./bin/Debug/
+        path: ./bin/x64/Debug/

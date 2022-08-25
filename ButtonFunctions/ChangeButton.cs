@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Threading;
 using static SchoolWallpaperChanger.MainWindow;
+using Windows.Native;
 
 namespace SchoolWallpaperChanger.Functions
 {
@@ -14,15 +15,17 @@ namespace SchoolWallpaperChanger.Functions
         public static bool stop = false;
         public static void Change(int Selected)
         {
-            if(stop)
+            if (stop)
                 WindowThread.window1.Close();
             GC.Collect();
             thread = new Thread(CheckDesktop.Check);
+            IActiveDesktop iad = shlobj.GetActiveDesktop();
             switch (Selected)
             {
                 case 0:
                     DisableUI();
-                    UIFunctions.SetWallpaper(PicLocation);
+                    iad.SetWallpaper(FileLocation, 0);
+                    iad.ApplyChanges(AD_Apply.ALL | AD_Apply.FORCE | AD_Apply.BUFFERED_REFRESH);
                     thread.Start();
                     MainWindow.Selected = 2;
                     break;
@@ -54,7 +57,8 @@ namespace SchoolWallpaperChanger.Functions
                         break;
                     File.Copy(PicLocation, $@"{SlideShowS.AppDataPath}\Microsoft\Windows\Themes\TranscodedWallpaper", true);
                     DisableUI();
-                    UIFunctions.SetWallpaper(FileLocation);
+                    iad.SetWallpaper(FileLocation, 0);
+                    iad.ApplyChanges(AD_Apply.ALL | AD_Apply.FORCE | AD_Apply.BUFFERED_REFRESH);
                     thread.Start();
                     break;
             }

@@ -40,6 +40,7 @@ namespace SchoolWallpaperChanger.Functions
         {
             string exeOld = Path.Combine(rootPath, "SchoolWallpaperChanger.exe.old");
             string pdbOld = Path.Combine(rootPath, "SchoolWallpaperChanger.pdb.old");
+            string dllOld = Path.Combine(rootPath, "DpiHelper.dll.old");
 
             if (File.Exists(exeOld))
             {
@@ -48,6 +49,10 @@ namespace SchoolWallpaperChanger.Functions
             if (File.Exists(pdbOld))
             {
                 File.Delete(pdbOld);
+            }
+            if (File.Exists(dllOld))
+            {
+                File.Delete(dllOld);
             }
             if (Directory.Exists(startPath))
             {
@@ -114,6 +119,7 @@ namespace SchoolWallpaperChanger.Functions
         {
             string Exe = Path.Combine(rootPath, "SchoolWallpaperChanger.exe");
             string pdb = Path.Combine(rootPath, "SchoolWallpaperChanger.pdb");
+            string Dll = Path.Combine(rootPath, "DpiHelper.dll");
             try
             {
                 string onlineVersion = ((Version)e.UserState).ToString();
@@ -126,6 +132,10 @@ namespace SchoolWallpaperChanger.Functions
                     if (File.Exists(pdb))
                     {
                         File.Move($"{rootPath}\\SchoolWallpaperChanger.pdb", $"{rootPath}\\SchoolWallpaperChanger.pdb.old");
+                    }
+                    if (File.Exists(Dll))
+                    {
+                        File.Move($"{rootPath}\\DpiHelper.dll", $"{rootPath}\\DpiHelper.dll.old");
                     }
                     try
                     {

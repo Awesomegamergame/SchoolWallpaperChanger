@@ -4,12 +4,26 @@ using System.Linq;
 using System.Windows;
 using System.Reflection;
 using System.Diagnostics;
+using System.Windows.Threading;
 using System.Runtime.InteropServices;
 
 namespace SchoolWallpaperChanger
 {
     public partial class App : Application
     {
+        public App() : base()
+        {
+            Dispatcher.UnhandledException += OnDispatcherUnhandledException;
+        }
+
+        void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Crash occurred, report this error: \n" + e.Exception.Message, "Crash Log", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                Process.Start("https://github.com/awesomegamergame/SchoolWallpaperChanger/issues");
+            Current.Shutdown();
+        }
+
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
@@ -37,9 +51,11 @@ namespace SchoolWallpaperChanger
             {
                 if (args.Length == 2)
                 {
-                    MainWindow window = new MainWindow();
-                    window.WindowState = WindowState.Minimized;
-                    window.ShowInTaskbar = false;
+                    MainWindow window = new MainWindow
+                    {
+                        WindowState = WindowState.Minimized,
+                        ShowInTaskbar = false
+                    };
                     window.Show();
                     window.Hide();
                     Functions.Startup.StartupM();
