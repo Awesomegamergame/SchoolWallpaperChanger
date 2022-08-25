@@ -1,14 +1,4 @@
-// DpiHelper.cpp : Defines the exported functions for the DLL application.
-//
-
-#include "stdafx.h"
 #include "DpiHelper.h"
-#include <memory>
-#include <cassert>
-#include <string>
-#include <map>
-#include <iostream>
-#include <fstream>
 
 bool DpiHelper::GetPathsAndModes(std::vector<DISPLAYCONFIG_PATH_INFO>& pathsV, std::vector<DISPLAYCONFIG_MODE_INFO>& modesV, int flags)
 {
@@ -36,25 +26,20 @@ bool DpiHelper::GetPathsAndModes(std::vector<DISPLAYCONFIG_PATH_INFO>& pathsV, s
     {
         modesV.push_back(modes[i]);
     }
-
     return true;
 }
-
 
 DpiHelper::DpiHelper()
 {
 }
 
-
 DpiHelper::~DpiHelper()
 {
 }
 
-
 DpiHelper::DPIScalingInfo DpiHelper::GetDPIScalingInfo(LUID adapterID, UINT32 sourceID)
 {
     DPIScalingInfo dpiInfo = {};
-
     DpiHelper::DISPLAYCONFIG_SOURCE_DPI_SCALE_GET requestPacket = {};
     requestPacket.header.type = (DISPLAYCONFIG_DEVICE_INFO_TYPE)DpiHelper::DISPLAYCONFIG_DEVICE_INFO_TYPE_CUSTOM::DISPLAYCONFIG_DEVICE_INFO_GET_DPI_SCALE;
     requestPacket.header.size = sizeof(requestPacket);
@@ -93,7 +78,6 @@ DpiHelper::DPIScalingInfo DpiHelper::GetDPIScalingInfo(LUID adapterID, UINT32 so
         //DisplayConfigGetDeviceInfo() failed
         return dpiInfo;
     }
-
     return dpiInfo;
 }
 
@@ -102,14 +86,8 @@ std::wstring GetTargetName(LUID adapterLUID, UINT32 sourceId)
     std::vector<DISPLAYCONFIG_PATH_INFO> pathsV;
     std::vector<DISPLAYCONFIG_MODE_INFO> modesV;
     int flags = QDC_ONLY_ACTIVE_PATHS;
-    if(false == DpiHelper::GetPathsAndModes(pathsV, modesV, flags))
-    {
-        wprintf(L"DpiHelper::GetPathsAndModes() failed\r\n");
-    }
-
     for(const auto& path : pathsV)
     {
-
         if(adapterLUID.LowPart == path.targetInfo.adapterId.LowPart
             && adapterLUID.HighPart == path.targetInfo.adapterId.HighPart
             && sourceId == path.sourceInfo.id)
@@ -119,10 +97,7 @@ std::wstring GetTargetName(LUID adapterLUID, UINT32 sourceId)
             deviceName.header.type = DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME;
             deviceName.header.adapterId = adapterLUID;
             deviceName.header.id = path.targetInfo.id;
-            if(ERROR_SUCCESS != DisplayConfigGetDeviceInfo(&deviceName.header))
-            {
-                wprintf(L"DisplayConfigGetDeviceInfo() failed\r\n");
-            }
+            if (ERROR_SUCCESS != DisplayConfigGetDeviceInfo(&deviceName.header)) {}
             else
             {
 
@@ -134,37 +109,17 @@ std::wstring GetTargetName(LUID adapterLUID, UINT32 sourceId)
                 return nameString;
             }
         }
-
     }
     return L"N/A";
-
 }
-
-
-
-void printOne(LUID adapterLUID, UINT32 sourceID)
-{
-    wprintf(L"GPU=%ld.%u,Desktop_Index_In_GPU=%d,Monitor=%ls\r\n"
-        , adapterLUID.HighPart
-        , adapterLUID.LowPart
-        , sourceID
-        , GetTargetName(adapterLUID, sourceID).data());
-}
-
-
 
 bool DpiHelper::SetDPIScaling(LUID adapterID, UINT32 sourceID, UINT32 dpiPercentToSet)
 {
-
-    wprintf(L"setting dpi scale to %d: ", dpiPercentToSet);
-    printOne(adapterID, sourceID);
     DPIScalingInfo dPIScalingInfo = GetDPIScalingInfo(adapterID, sourceID);
-
     if(dpiPercentToSet == dPIScalingInfo.current)
     {
         return true;
     }
-
     if(dpiPercentToSet < dPIScalingInfo.mininum)
     {
         dpiPercentToSet = dPIScalingInfo.mininum;
@@ -173,9 +128,7 @@ bool DpiHelper::SetDPIScaling(LUID adapterID, UINT32 sourceID, UINT32 dpiPercent
     {
         dpiPercentToSet = dPIScalingInfo.maximum;
     }
-
     int idx1 = -1, idx2 = -1;
-
     int i = 0;
     for(const auto& val : DpiVals)
     {
@@ -190,13 +143,11 @@ bool DpiHelper::SetDPIScaling(LUID adapterID, UINT32 sourceID, UINT32 dpiPercent
         }
         i++;
     }
-
     if((idx1 == -1) || (idx2 == -1))
     {
         //Error cannot find dpi value
         return false;
     }
-
     int dpiRelativeVal = idx1 - idx2;
 
     DpiHelper::DISPLAYCONFIG_SOURCE_DPI_SCALE_SET setPacket = {};
@@ -219,12 +170,10 @@ bool DpiHelper::SetDPIScaling(LUID adapterID, UINT32 sourceID, UINT32 dpiPercent
     return true;
 }
 
-
 #define MAX_ID  10
 LUID GpuId[MAX_ID];
 UINT32 DesktopIndexInGpu[MAX_ID];
 UINT32 oldDPI[MAX_ID];
-
 
 void PrintDpiInfo()
 {
@@ -244,8 +193,6 @@ void PrintDpiInfo()
         auto adapterLUID = path.targetInfo.adapterId;
         auto sourceID = path.sourceInfo.id;
         std::wstring monitor_name = GetTargetName(adapterLUID, sourceID);
-        
-        printOne(adapterLUID, sourceID);
 
         DpiHelper::DPIScalingInfo dpiInfo = DpiHelper::GetDPIScalingInfo(adapterLUID, sourceID);
 
@@ -260,31 +207,22 @@ void PrintDpiInfo()
         myfile << dpiInfo.recommended << '\n';
 
         oldDPI[i] = dpiInfo.current;
-
-        wprintf(L"Available DPI:\r\n");
         int curdpi = 0;
         for(const auto& dpi : DpiVals)
         {
             if((dpi >= dpiInfo.mininum) && (dpi <= dpiInfo.maximum))
             {
-                wprintf(L"    %d\r\n", dpi);
                 myfile << dpi << ' ';
             }
         }
-
         myfile.close();
-        wprintf(L"    current DPI: %d\r\n", dpiInfo.current);
-
-        wprintf(L"    reccomended DPI: %d\r\n", dpiInfo.recommended);
 
         i++;
         if(i >= MAX_ID)
         {
-            wprintf(L"To many desktops\r\n");
             break;
         }
     }
-
 }
 
 void SetDPIScaling(INT32 adapterIDHigh, UINT32 adapterIDlow, UINT32 sourceID, UINT32 dpiPercentToSet)
@@ -293,15 +231,4 @@ void SetDPIScaling(INT32 adapterIDHigh, UINT32 adapterIDlow, UINT32 sourceID, UI
     adapterId.HighPart = adapterIDHigh;
     adapterId.LowPart = adapterIDlow;
     DpiHelper::SetDPIScaling(adapterId, sourceID, dpiPercentToSet);
-}
-
-void RestoreDPIScaling()
-{
-    wprintf(L"Now restore DPI settings...\r\n");
-    for(int i = 0; i < MAX_ID; i++)
-    {
-        if(GpuId[i].LowPart == 0 && GpuId[i].HighPart == 0) break;
-        DpiHelper::SetDPIScaling(GpuId[i], DesktopIndexInGpu[i], oldDPI[i]);
-    }
-
 }

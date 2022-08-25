@@ -1,7 +1,5 @@
 #pragma once
-#include <Windows.h>
-#include <vector>
-
+#include "stdafx.h"
 
 /*
 * OS reports DPI scaling values in relative terms, and not absolute terms.
@@ -106,4 +104,3 @@ public:
     static DpiHelper::DPIScalingInfo GetDPIScalingInfo(LUID adapterID, UINT32 sourceID);
     static bool SetDPIScaling(LUID adapterID, UINT32 sourceID, UINT32 dpiPercentToSet);
 };
-
