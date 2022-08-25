@@ -19,7 +19,7 @@ jobs:
     - name: Install Inno Setup
       run: '../is.exe /VERYSILENT /NORESTART /ALLUSERS'
     - name: Build Project
-      run: msbuild SchoolWallpaperChanger.csproj /t:Build /p:Configuration=Release
+      run: msbuild SchoolWallpaperChanger.sln /t:Build /p:Configuration=Release
     - name: Compile Installer
       run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /f Build.iss'
     - name: Release

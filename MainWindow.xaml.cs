@@ -160,11 +160,6 @@ namespace SchoolWallpaperChanger
             shortcut.Save();
         }
 
-        //TODO: We should do all of this dll loading after the window gets initialized
-        //      so we get a better crash log instead of the app failing to start error
-        //
-        //      But for now we will put it here for testing but change it later before release
-
         [DllImport("DpiHelper.dll")]
         static public extern void PrintDpiInfo();
 
@@ -173,20 +168,6 @@ namespace SchoolWallpaperChanger
         [DllImport("DpiHelper.dll")]
         static public extern void RestoreDPIScaling();
 
-        private void Scale_Initialized(object sender, EventArgs e)
-        {
-            PrintDpiInfo();
-            string Scales = GetLine("DPI.txt", 5);
-            string currentScale = GetLine("DPI.txt", 3);
-            string[] Split = Scales.Split(' ');
-            int s = Split.Length - 1;
-            for (int x = 0; x < s; x++)
-            {
-                Scale.Items.Add(Split[x]);
-                if (currentScale.Equals(Split[x]))
-                    Scale.SelectedIndex = x;
-            }
-        }
         string GetLine(string fileName, int line)
         {
             using (var sr = new StreamReader(fileName))
@@ -195,12 +176,6 @@ namespace SchoolWallpaperChanger
                     sr.ReadLine();
                 return sr.ReadLine();
             }
-        }
-
-        private void ScaleLRec_Initialized(object sender, EventArgs e)
-        {
-            string rec = GetLine("DPI.txt", 4);
-            ScaleLRec.Content = $"Recommended: {rec}%";
         }
 
         private void Scale_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -218,6 +193,23 @@ namespace SchoolWallpaperChanger
                 SetDPIScaling(adapterIDHigh, adapterIDLow, sourceID, scalePercent);
                 MessageBox.Show("It is Recommended to log out and back in to fully apply the scale to all apps.");
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            PrintDpiInfo();
+            string Scales = GetLine("DPI.txt", 5);
+            string currentScale = GetLine("DPI.txt", 3);
+            string[] Split = Scales.Split(' ');
+            int s = Split.Length - 1;
+            for (int x = 0; x < s; x++)
+            {
+                Scale.Items.Add(Split[x]);
+                if (currentScale.Equals(Split[x]))
+                    Scale.SelectedIndex = x;
+            }
+            string rec = GetLine("DPI.txt", 4);
+            ScaleLRec.Content = $"Recommended: {rec}%";
         }
     }
 }
