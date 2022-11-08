@@ -199,11 +199,12 @@ namespace SchoolWallpaperChanger
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            string dpiLocation = $"{AppDomain.CurrentDomain.BaseDirectory}\\DPI.txt";
             PrintDpiInfo(AppDomain.CurrentDomain.BaseDirectory);
-            if (System.IO.File.Exists("DPI.txt"))
+            if (System.IO.File.Exists(dpiLocation))
             {
-                string Scales = GetLine("DPI.txt", 5);
-                string currentScale = GetLine("DPI.txt", 3);
+                string Scales = GetLine(dpiLocation, 5);
+                string currentScale = GetLine(dpiLocation, 3);
                 string[] Split = Scales.Split(' ');
                 int s = Split.Length - 1;
                 for (int x = 0; x < s; x++)
@@ -212,7 +213,7 @@ namespace SchoolWallpaperChanger
                     if (currentScale.Equals(Split[x]))
                         Scale.SelectedIndex = x;
                 }
-                string rec = GetLine("DPI.txt", 4);
+                string rec = GetLine(dpiLocation, 4);
                 ScaleLRec.Content = $"Recommended: {rec}%";
             }
             else
