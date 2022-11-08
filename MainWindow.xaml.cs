@@ -167,8 +167,6 @@ namespace SchoolWallpaperChanger
 
         [DllImport("DpiHelper.dll")]
         static public extern int SetDPIScaling(Int32 adapterIDHigh, UInt32 adapterIDlow, UInt32 sourceID, UInt32 dpiPercentToSet);
-        [DllImport("DpiHelper.dll")]
-        static public extern void RestoreDPIScaling();
 
         string GetLine(string fileName, int line)
         {
