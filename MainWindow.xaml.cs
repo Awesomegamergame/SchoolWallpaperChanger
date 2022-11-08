@@ -163,7 +163,7 @@ namespace SchoolWallpaperChanger
         #region Windows Scale
 
         [DllImport("DpiHelper.dll")]
-        static public extern void PrintDpiInfo();
+        static public extern void PrintDpiInfo(string str);
 
         [DllImport("DpiHelper.dll")]
         static public extern int SetDPIScaling(Int32 adapterIDHigh, UInt32 adapterIDlow, UInt32 sourceID, UInt32 dpiPercentToSet);
@@ -199,7 +199,7 @@ namespace SchoolWallpaperChanger
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            PrintDpiInfo();
+            PrintDpiInfo(AppDomain.CurrentDomain.BaseDirectory);
             if (System.IO.File.Exists("DPI.txt"))
             {
                 string Scales = GetLine("DPI.txt", 5);
