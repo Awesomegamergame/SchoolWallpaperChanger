@@ -9,19 +9,19 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.5.0
     - name: Setup msbuild
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v1.1.3
     - name: Build Project
       run: msbuild SchoolWallpaperChanger.sln /t:Build /p:Configuration=Debug
     - name: Resolve Short Commit Hash
       if: startsWith(github.ref, 'refs/tags/') == false
       id: get_hash
       shell: bash
-      run: echo ::set-output name=hash::`git rev-parse --short HEAD`
+      run: echo "hash=`git rev-parse --short HEAD`" >> $GITHUB_OUTPUT
     - name: Upload Debug Build
       if: startsWith(github.ref, 'refs/tags/') == false
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3.1.1
       with:
         name: SchoolWallpaperChanger-${{ steps.get_hash.outputs.hash }}
         path: ./bin/x64/Debug/
