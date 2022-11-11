@@ -175,7 +175,7 @@ LUID GpuId[MAX_ID];
 UINT32 DesktopIndexInGpu[MAX_ID];
 UINT32 oldDPI[MAX_ID];
 
-void PrintDpiInfo()
+void PrintDpiInfo(char* str)
 {
 
     std::vector<DISPLAYCONFIG_PATH_INFO> pathsV;
@@ -197,7 +197,11 @@ void PrintDpiInfo()
         DpiHelper::DPIScalingInfo dpiInfo = DpiHelper::GetDPIScalingInfo(adapterLUID, sourceID);
 
         std::ofstream myfile;
-        myfile.open("DPI.txt");
+        //takes char* of the apps location from c# into c++ and
+        //creates the file at that location instead of current directory
+        std::string first = str;
+        std::string com = first + "\\DPI.txt";
+        myfile.open(com);
         GpuId[i] = adapterLUID;
         myfile << adapterLUID.HighPart << '.';
         myfile << adapterLUID.LowPart << '\n';
