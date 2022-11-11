@@ -37,7 +37,7 @@ body:
       label: Software Version
       description: What version of the program are you running? *If not running the bleeding edge build, please ensure you have updated to the latest [release](https://github.com/awesomegamergame/SchoolWallpaperChanger/releases) in case your problem has already been fixed.*
       options:
-        - 1.4.0 (Latest)
+        - 1.4.1 (Latest)
         - Dev Branch (Bleeding Edge) Specify Commit Number
     validations:
       required: true
