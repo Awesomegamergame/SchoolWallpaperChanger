@@ -8,11 +8,11 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3.1.0
     - name: Setup msbuild
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v1.1.3
     - name: Download Inno Setup
-      uses: suisei-cn/actions-download-file@v1
+      uses: suisei-cn/actions-download-file@v1.3.0
       with:
         url: https://jrsoftware.org/download.php/is.exe
         target: ../
@@ -23,7 +23,7 @@ jobs:
     - name: Compile Installer
       run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /f Build.iss'
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v0.1.14
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: SchoolWallpaperChanger.Installer.exe
