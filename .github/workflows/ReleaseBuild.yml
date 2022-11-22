@@ -23,7 +23,7 @@ jobs:
     - name: Compile Installer
       run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /f Build.iss'
     - name: Release
-      uses: softprops/action-gh-release@v0.1.14
+      uses: softprops/action-gh-release@v0.1.15
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: SchoolWallpaperChanger.Installer.exe
